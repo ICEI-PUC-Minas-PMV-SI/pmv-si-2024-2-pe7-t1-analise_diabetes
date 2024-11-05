@@ -36,6 +36,11 @@ As características categóricas foram transformadas em valores numéricos para 
 2. Separação dos dados
 O conjunto de dados foi dividido em 70% para treinamento e 30% para teste, permitindo que o modelo aprenda com a maior parte dos dados enquanto é testado em dados inéditos.
 
+O Código a seguir feito na linguagem python foi usado para a preparação dos dados. 
+</br>
+</br>
+[Link para Código de preparação](/src/dataPreparation.py)
+
 # Descrição dos modelos
 
 <!-- Guid do Doc -->
