@@ -1,5 +1,7 @@
 # Preparação dos dados
 
+<!-- Guia do Doc -->
+<!--
 Nesta etapa, deverão ser descritas todas as técnicas utilizadas para pré-processamento/tratamento dos dados.
 
 Algumas das etapas podem estar relacionadas à:
@@ -24,15 +26,29 @@ Algumas das etapas podem estar relacionadas à:
 
 * Entre outras....
 
-Avalie quais etapas são importantes para o contexto dos dados que você está trabalhando, pois a qualidade dos dados e a eficácia do pré-processamento desempenham um papel fundamental no sucesso de modelo(s) de aprendizado de máquina. É importante entender o contexto do problema e ajustar as etapas de preparação de dados de acordo com as necessidades específicas de cada projeto.
+Avalie quais etapas são importantes para o contexto dos dados que você está trabalhando, pois a qualidade dos dados e a eficácia do pré-processamento desempenham um papel fundamental no sucesso de modelo(s) de aprendizado de máquina. É importante entender o contexto do problema e ajustar as etapas de preparação de dados de acordo com as necessidades específicas de cada projeto. -->
+
+Para a preparação dos dados no treinamento de modelos de machine learning, foram seguidos dois passos principais:
+
+1. Codificação de categorias binárias
+As características categóricas foram transformadas em valores numéricos para facilitar o cálculo de probabilidades pelos algoritmos. Campos como "Sim" e "Não" foram codificados como 1 e 0, respectivamente, e a mesma lógica foi aplicada às variáveis "classe" (positivo e negativo para risco de diabetes) e "gênero" (masculino e feminino).
+
+2. Separação dos dados
+O conjunto de dados foi dividido em 70% para treinamento e 30% para teste, permitindo que o modelo aprenda com a maior parte dos dados enquanto é testado em dados inéditos.
 
 # Descrição dos modelos
 
+<!-- Guid do Doc -->
+<!--
 Nesta seção, conhecendo os dados e de posse dos dados preparados, é hora de descrever os algoritmos de aprendizado de máquina selecionados para a construção dos modelos propostos. Inclua informações abrangentes sobre cada algoritmo implementado, aborde conceitos fundamentais, princípios de funcionamento, vantagens/limitações e justifique a escolha de cada um dos algoritmos. 
 
 Explore aspectos específicos, como o ajuste dos parâmetros livres de cada algoritmo. Lembre-se de experimentar parâmetros diferentes e principalmente, de justificar as escolhas realizadas.
 
-Como parte da comprovação de construção dos modelos, um vídeo de demonstração com todas as etapas de pré-processamento e de execução dos modelos deverá ser entregue. Este vídeo poderá ser do tipo _screencast_ e é imprescindível a narração contemplando a demonstração de todas as etapas realizadas.
+Como parte da comprovação de construção dos modelos, um vídeo de demonstração com todas as etapas de pré-processamento e de execução dos modelos deverá ser entregue. Este vídeo poderá ser do tipo _screencast_ e é imprescindível a narração contemplando a demonstração de todas as etapas realizadas. -->
+
+1 - Naive Bayers
+O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi escolhido por tratar todas as variáveis de entrada como independentes entre si, mesmo que na prática isso nem sempre seja verdade. Essa simplicidade fez do Naive Bayes um modelo atrativo, rápido e eficiente para classificação, especialmente com dados categóricos e binários como o dataset analisado.
+
 
 # Avaliação dos modelos criados
 
