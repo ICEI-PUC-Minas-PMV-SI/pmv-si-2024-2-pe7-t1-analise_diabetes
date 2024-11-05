@@ -36,7 +36,7 @@ As características categóricas foram transformadas em valores numéricos para 
 2. Separação dos dados
 O conjunto de dados foi dividido em 70% para treinamento e 30% para teste, permitindo que o modelo aprenda com a maior parte dos dados enquanto é testado em dados inéditos.
 
-O Código a seguir feito na linguagem python foi usado para a preparação dos dados. 
+O Código a seguir feito na linguagem python foi usado como base para a preparação dos dados de maneira geral. 
 </br>
 </br>
 [Link para Código de preparação](/src/dataPreparation.py)
@@ -51,7 +51,7 @@ Explore aspectos específicos, como o ajuste dos parâmetros livres de cada algo
 
 Como parte da comprovação de construção dos modelos, um vídeo de demonstração com todas as etapas de pré-processamento e de execução dos modelos deverá ser entregue. Este vídeo poderá ser do tipo _screencast_ e é imprescindível a narração contemplando a demonstração de todas as etapas realizadas. -->
 
-1 - Naive Bayers
+- <h3>Naive Bayers</h3>
 O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi escolhido por tratar todas as variáveis de entrada como independentes entre si, mesmo que na prática isso nem sempre seja verdade. Essa simplicidade fez do Naive Bayes um modelo atrativo, rápido e eficiente para classificação, especialmente com dados categóricos e binários como o dataset analisado.
 
 
