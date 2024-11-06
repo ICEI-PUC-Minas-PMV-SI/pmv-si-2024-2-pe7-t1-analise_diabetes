@@ -55,7 +55,7 @@ Como parte da comprovação de construção dos modelos, um vídeo de demonstra�
 O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi escolhido por tratar todas as variáveis de entrada como independentes entre si, mesmo que na prática isso nem sempre seja verdade. Essa simplicidade fez do Naive Bayes um modelo atrativo, rápido e eficiente para classificação, especialmente com dados categóricos e binários como o dataset analisado.
 
 Verificando o heatmap abaixo notamos uma nescessidade ordenar as colunas pelo valor de correlação com a classificação de diabetes.
-</br> </br>![Heatmap correlação variáveis](docs/img/heatmap.png) </br> </br>
+</br> </br>![Heatmap correlação variáveis](/docs/img/heatmap.png) </br> </br>
 Seguindo essa lógica temos a seguinte ordem:
 
 1. polyuria
