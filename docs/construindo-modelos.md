@@ -39,7 +39,7 @@ O conjunto de dados foi dividido em 70% para treinamento e 30% para teste, permi
 O Código a seguir feito na linguagem python foi usado como base para a preparação dos dados de maneira geral. 
 </br>
 </br>
-[Link para Código de preparação](/src/dataPreparation.py)
+[Link para Código de preparação Simplificado](/src/dataPreparation.py)
 
 # Descrição dos modelos
 
@@ -54,6 +54,44 @@ Como parte da comprovação de construção dos modelos, um vídeo de demonstra�
 - <h3>Naive Bayers</h3>
 O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi escolhido por tratar todas as variáveis de entrada como independentes entre si, mesmo que na prática isso nem sempre seja verdade. Essa simplicidade fez do Naive Bayes um modelo atrativo, rápido e eficiente para classificação, especialmente com dados categóricos e binários como o dataset analisado.
 
+Verificando o heatmap abaixo notamos uma nescessidade ordenar as colunas pelo valor de correlação com a classificação de diabetes.
+</br> </br>![Heatmap correlação variáveis](docs/img/heatmap.png) </br> </br>
+Seguindo essa lógica temos a seguinte ordem:
+
+1. polyuria
+2. polydipsia
+3. age
+4. gender
+5. sudden_weight_loss
+6. partial_paresis
+7. polyphagia
+8. irritability
+9. alopecia
+10. visual_blurring
+11. weakness
+12. muscle_stiffness
+13. genital_thrush
+14. obesity
+15. delayed_healing
+16. itching
+  
+Possuímos muitos atributos, para analizarmos até que ponto o aumento deles influencia a qualidade do modelo usaremos a seguinte estratégia:
+
+1. Selecionar o 1º atributo
+2. Treinar o modelo somente com ele
+3. Verificar o recall
+4. Voltar para etapa 1 mas agora treinar utilizando mais um atributo
+5. Seguir o fluxo até finalizar a quantidade de atributos
+6. Usando essa estratégia a cada vez o modelo vai ser treinado e poderemos acompanhar como o aumento do número de atributos influência nossas métricas.
+
+O Código a seguir feito na linguagem python foi usado para a execução do treinamento desse modelo. 
+</br>
+</br>
+[Link para Código](/src/NaiveBayers.py)
+
+- <h3>Random Forest</h3>
+
+- <h3>Decision Tree</h3>
 
 # Avaliação dos modelos criados
 
