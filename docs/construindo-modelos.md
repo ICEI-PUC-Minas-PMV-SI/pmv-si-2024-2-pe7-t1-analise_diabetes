@@ -54,6 +54,8 @@ Como parte da comprovação de construção dos modelos, um vídeo de demonstra�
 - <h3>Naive Bayers</h3>
 O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi escolhido por tratar todas as variáveis de entrada como independentes entre si, mesmo que na prática isso nem sempre seja verdade. Essa simplicidade fez do Naive Bayes um modelo atrativo, rápido e eficiente para classificação, especialmente com dados categóricos e binários como o dataset analisado.
 
+Ultilizamos o objeto GaussianNB que assume que os atributos seguem uma distribuição normal para cada classe, como no nosso caso temos o atributo idade e não queremos transformar em faixa etária para não perder detalhes, seguimos com esse algoritmo, em específico para esse valor deu certo pois a idade segue uma distribuição normal.
+
 Verificando o heatmap abaixo notamos uma nescessidade ordenar as colunas pelo valor de correlação com a classificação de diabetes.
 </br> </br>![Heatmap correlação variáveis](/docs/img/heatmap.png) </br> </br>
 Seguindo essa lógica temos a seguinte ordem:
@@ -97,11 +99,42 @@ O Código a seguir feito na linguagem python foi usado para a execução do trei
 
 ## Métricas utilizadas
 
-Nesta seção, as métricas utilizadas para avaliar os modelos desenvolvidos deverão ser apresentadas (p. ex.: acurácia, precisão, recall, F1-Score, MSE etc.). A escolha de cada métrica deverá ser justificada, pois esta escolha é essencial para avaliar de forma mais assertiva a qualidade do modelo construído. 
+<!--Nesta seção, as métricas utilizadas para avaliar os modelos desenvolvidos deverão ser apresentadas (p. ex.: acurácia, precisão, recall, F1-Score, MSE etc.). A escolha de cada métrica deverá ser justificada, pois esta escolha é essencial para avaliar de forma mais assertiva a qualidade do modelo construído. -->
+
+- <h3>Naive Bayers</h3> </br>
+A escolha do recall como métrica principal para a classificação de diabetes se justifica pelo fato de que, nesse contexto, o objetivo é evitar falsos negativos. Um falso negativo significa que uma pessoa que tem diabetes seria incorretamente classificada como não diabética, o que pode levar a consequências graves, já que ela não receberia o tratamento adequado.
+
+O recall mede a capacidade do modelo de detectar corretamente todos os casos positivos (diabetes), ou seja, a proporção de verdadeiros positivos em relação ao total de casos que realmente são positivos. Um recall alto significa que o modelo consegue identificar a maioria das pessoas com diabetes, reduzindo ao máximo os falsos negativos.
+
+Razões principais para usar o recall:
+
+1- Impacto crítico de falsos negativos: No diagnóstico de doenças como o diabetes, deixar de identificar uma pessoa doente pode levar a complicações de saúde sérias e ao agravamento da doença.
+2- Prioridade na detecção de casos positivos: O recall foca em identificar corretamente todos os casos de diabetes, mesmo que isso aumente a chance de alguns falsos positivos, o que é mais aceitável nesse cenário. Portanto, o uso do recall é adequado quando a minimização de falsos negativos é a prioridade, como no caso da classificação de doenças como diabetes.
+
+- <h3>Random Forest</h3>
+
+- <h3>Decision Tree</h3>
 
 ## Discussão dos resultados obtidos
 
-Nesta seção, discuta os resultados obtidos pelos modelos construídos, no contexto prático em que os dados se inserem, promovendo uma compreensão abrangente e aprofundada da qualidade de cada um deles. Lembre-se de relacionar os resultados obtidos ao problema identificado, a questão de pesquisa levantada e estabelecendo relação com os objetivos previamente propostos. 
+<!--Nesta seção, discuta os resultados obtidos pelos modelos construídos, no contexto prático em que os dados se inserem, promovendo uma compreensão abrangente e aprofundada da qualidade de cada um deles. Lembre-se de relacionar os resultados obtidos ao problema identificado, a questão de pesquisa levantada e estabelecendo relação com os objetivos previamente propostos. -->
+
+- <h3>Naive Bayers</h3> </br>
+
+O gráfico abaixo mostra o desempenho de um modelo de Naive Bayes em função do número de características usadas, com quatro métricas principais plotadas: Revocação para a Classe 0, Revocação para a Classe 1, Acurácia e F1 Score.
+
+</br> </br>![Resultado Naive Byers](/docs/img/NbMetrics.png) </br> </br>
+
+Focaremos a análise nas linhas vermelhas e azul para os atributos de recall.
+
+Inicialmente, o recall para a Classe 0 mostra um ligeiro aumento, atingindo o pico em torno de 3 características. Após 3 características, o recall para a Classe 0 apresenta uma queda acentuada quando o número de características é de cerca de 5, depois estabiliza em um nível mais baixo à medida que as características aumentam. Isso indica que o aumento no número de características não ajuda a melhorar o recall para a Classe 0 após um certo ponto, potencialmente devido a overfitting ou características não informativas para esta classe.
+Já o recall para a Classe 1 geralmente aumenta à medida que o número de características cresce, atingindo o pico entre 3 e 6 características e estabilizando-se em um valor alto a partir de então. O modelo parece ser melhor em identificar instâncias da Classe 1 à medida que mais características são adicionadas, embora essa tendência eventualmente se estabilize. Isso pode sugerir que o modelo se beneficia mais de características adicionais para a Classe 1 do que para a Classe 0.
+
+Logo, nossa análise sugere que o uso de cerca de 3 a 6 características proporciona um bom equilíbrio para o classificador Naive Bayes, gerando alta revocação para a Classe 1, acurácia estável e F1 Score, sem perda significativa de revocação para a Classe 0.
+
+- <h3>Random Forest</h3>
+
+- <h3>Decision Tree</h3>
 
 # Pipeline de pesquisa e análise de dados
 
