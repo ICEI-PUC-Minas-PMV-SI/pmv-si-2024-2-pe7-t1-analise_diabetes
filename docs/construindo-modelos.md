@@ -101,7 +101,8 @@ O Código a seguir feito na linguagem python foi usado para a execução do trei
 
 <!--Nesta seção, as métricas utilizadas para avaliar os modelos desenvolvidos deverão ser apresentadas (p. ex.: acurácia, precisão, recall, F1-Score, MSE etc.). A escolha de cada métrica deverá ser justificada, pois esta escolha é essencial para avaliar de forma mais assertiva a qualidade do modelo construído. -->
 
-- <h3>Naive Bayers</h3> </br>
+- <h3>Naive Bayers</h3>
+
 A escolha do recall como métrica principal para a classificação de diabetes se justifica pelo fato de que, nesse contexto, o objetivo é evitar falsos negativos. Um falso negativo significa que uma pessoa que tem diabetes seria incorretamente classificada como não diabética, o que pode levar a consequências graves, já que ela não receberia o tratamento adequado.
 
 O recall mede a capacidade do modelo de detectar corretamente todos os casos positivos (diabetes), ou seja, a proporção de verdadeiros positivos em relação ao total de casos que realmente são positivos. Um recall alto significa que o modelo consegue identificar a maioria das pessoas com diabetes, reduzindo ao máximo os falsos negativos.
@@ -119,7 +120,7 @@ Razões principais para usar o recall:
 
 <!--Nesta seção, discuta os resultados obtidos pelos modelos construídos, no contexto prático em que os dados se inserem, promovendo uma compreensão abrangente e aprofundada da qualidade de cada um deles. Lembre-se de relacionar os resultados obtidos ao problema identificado, a questão de pesquisa levantada e estabelecendo relação com os objetivos previamente propostos. -->
 
-- <h3>Naive Bayers</h3> </br>
+- <h3>Naive Bayers</h3> 
 
 O gráfico abaixo mostra o desempenho de um modelo de Naive Bayes em função do número de características usadas, com quatro métricas principais plotadas: Revocação para a Classe 0, Revocação para a Classe 1, Acurácia e F1 Score.
 
