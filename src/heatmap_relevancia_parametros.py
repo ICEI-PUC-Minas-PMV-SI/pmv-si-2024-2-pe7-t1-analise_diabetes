@@ -4,14 +4,10 @@ import matplotlib.pyplot as plt
 from scipy.stats import chi2_contingency
 
 # Carregar o CSV
-df = pd.read_csv('diabetes_risk_prediction_dataset.csv')
-
-max_age = df['Age'].max()
-min_age = df['Age'].min()
-
+df = pd.read_csv('./dataset-full.csv')
 
 # Converter as variáveis categóricas Yes/No e Positive/Negative para 1/0
-df.replace({'Yes': 1, 'No': 0, 'Positive': 1, 'Negative': 0}, inplace=True)
+df.replace({'Yes': 1, 'No': 0, 'Positive': 1, 'Negative': 0, 'Male': 1, 'Female': 2}, inplace=True)
 
 # Função para calcular a correlação de Cramer's V para variáveis categóricas
 def cramers_v(x, y):

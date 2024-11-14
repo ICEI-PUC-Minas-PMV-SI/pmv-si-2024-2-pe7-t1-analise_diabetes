@@ -86,7 +86,11 @@ Como parte da comprovação de construção dos modelos, um vídeo de demonstra�
 ## Naive bayes
 O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi selecionado por tratar todas as variáveis de entrada como independentes entre si, mesmo que, na prática, essa suposição nem sempre seja válida. Essa simplicidade torna o Naive Bayes um modelo atrativo, rápido e eficiente para tarefas de classificação, especialmente com dados categóricos e binários, como os presentes no dataset analisado.
 
-Foi utilizado o objeto GaussianNB, que assume que os atributos seguem uma distribuição normal para cada classe. Como o dataset inclui a variável "idade" e, para preservar os detalhes, optou-se por não convertê-la em faixas etárias, esse algoritmo se mostrou adequado, dado que a "idade" apresenta uma distribuição aproximadamente normal.
+Foi utilizado o objeto GaussianNB, que assume que os atributos seguem uma distribuição normal para cada classe.
+```python3
+gnb = GaussianNB()
+```
+Isso foi escolhido para preservar os detalhes relacionados ao atributo idade, já que ele não é uma categoria e a sua conversão em faixas etárias causaria a perda de detalhes. É importante deixar claro que esse algoritmo somente se mostrou adequado nesse caso pois o atributo "idade" apresenta uma distribuição normal, atributos com uma variação muito grande em sua distribuição não seriam adequados.
 
 A análise do heatmap indicou a necessidade de ordenar as colunas de acordo com o valor de correlação com a classificação de diabetes.
 </br> </br>![Heatmap correlação variáveis](/docs/img/heatmap.png) </br> </br>
@@ -108,7 +112,47 @@ Seguindo essa lógica, as variáveis foram ordenadas com base no valor de correl
 14. obesity
 15. delayed_healing
 16. itching
-  
+
+Para construir essa lista foi necessário carregar o dataset em memória utilizando o pandas
+```python3
+df = pd.read_csv('./dataset-full.csv')
+```
+
+Converter as variáveis categóricas como gênero e classificações binárias (Sim/Não) para valores numéricos
+```python3
+df.replace({'Yes': 1, 'No': 0, 'Positive': 1, 'Negative': 0, 'Male': 1, 'Female': 2}, inplace=True)
+```
+
+E finalmente calcular a matriz de correlação entre todas as variáveis
+
+```
+# Define a função que vai calcular a correlação entre duas variáveis tendo como entrada duas listas com valores medidos
+def cramers_v(x, y):
+    contingency_table = pd.crosstab(x, y)
+    chi2, _, _, _ = chi2_contingency(contingency_table)
+    n = contingency_table.sum().sum()
+    return (chi2 / (n * (min(contingency_table.shape) - 1))) ** 0.5
+
+# Para cada coluna do dataset aplica a validação com todas as colunas do dataset
+# Dessa forma todos os atributos serão testados com todos os atributos
+# Essa parte é essencial para construir o heatmap porém é descartável para construir a lista
+correlation_matrix = df.apply(lambda x: df.apply(lambda y: cramers_v(x, y)))
+```
+
+Então é calculado a correlação para todas as colunas do dataset em relação ao diagnóstico com excessão do proprio diagnóstico
+```python3
+class_correlations = {col: cramers_v(df[col], df['class']) for col in df.columns if col != 'class'}
+```
+
+O resultado é um dicionário relacionando a coluna ao valor de correlação com o diagnóstico, então basta ordenar e exibir os valores
+```python3
+sorted_relevance = sorted(class_correlations.items(), key=lambda item: item[1], reverse=True)
+
+print("Relevância das variáveis em relação à variável 'class':")
+for variable, relevance in sorted_relevance:
+    print(f"{variable}: {relevance:.4f}")
+```
+
 Devido à presença de diversos atributos, para analisar até que ponto o aumento deles influencia a qualidade do modelo, será adotada a seguinte estratégia:
 
 1. Selecionar o 1º atributo

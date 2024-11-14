@@ -26,7 +26,7 @@ sorted_headers_relevance = [
 ]
 
 # Carregar o CSV
-data = pd.read_csv('../dataset-full.csv')
+data = pd.read_csv('./dataset-full.csv')
 
 # Renomear os cabeçalhos para snake_case
 data.columns = data.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '')
