@@ -59,11 +59,11 @@ A idade foi preservada e não foi convertida para uma categoria.
 O conjunto de dados foi dividido em 70% para treinamento e 30% para teste, permitindo que o modelo aprenda com a maior parte dos dados enquanto é testado em dados inéditos.
 
 ```python3
- X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.3, stratify=y, random_state=42)
+ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, stratify=y, random_state=42)
 ```
-Utilizando da função `tran_test_split` que é capaz de separar a base de dados em uma porção de teste e outra porção para validação. Do parâmetros utilizados os mais importantes são:
+Utilizando da função `train_test_split` que é capaz de separar a base de dados em uma porção de teste e outra porção para validação. Do parâmetros utilizados os mais importantes são:
 
-- train_size: Descreve o valor da proporção em que o dataset irá ser quebrado, nesse caso o valor 0.3, representa o mesmo que 30%. Logo 30% será separado para testes e 0% para validação.
+- train_size: Descreve o valor da proporção em que o dataset irá ser quebrado, nesse caso o valor 0.7, representa o mesmo que 70%. Logo 70% será separado para treinamento e 30% para validação.
 - stratify: Realiza amostragem estratificada pela classificação de diabetes. isso significa que a mesma proporção de diagnósticos positivos e negativos que existe no dataset completo será utilizado na amostra de testes e consequentemente na amostra de validação.
 - random_state: É uma semente utilizada para construir números pseudoaleatórios, sendo assim em toda execução os mesmos dados de testes serão extraídos.
 
@@ -125,7 +125,7 @@ df.replace({'Yes': 1, 'No': 0, 'Positive': 1, 'Negative': 0, 'Male': 1, 'Female'
 
 E finalmente calcular a matriz de correlação entre todas as variáveis
 
-```
+```python3
 # Define a função que vai calcular a correlação entre duas variáveis tendo como entrada duas listas com valores medidos
 def cramers_v(x, y):
     contingency_table = pd.crosstab(x, y)
@@ -153,20 +153,137 @@ for variable, relevance in sorted_relevance:
     print(f"{variable}: {relevance:.4f}")
 ```
 
-Devido à presença de diversos atributos, para analisar até que ponto o aumento deles influencia a qualidade do modelo, será adotada a seguinte estratégia:
+Associando a ordem com suas respectivas colunas o seguinte ranking é formado:
+```python3
+sorted_headers_relevance = [
+    'polyuria',
+    'polydipsia',
+    'age',
+    'gender',
+    'sudden_weight_loss',
+    'partial_paresis',
+    'polyphagia',
+    'irritability',
+    'alopecia',
+    'visual_blurring',
+    'weakness',
+    'muscle_stiffness',
+    'genital_thrush',
+    'obesity',
+    'delayed_healing',
+    'itching',
+]
 
+```
+
+Devido à presença de diversos atributos, para analisar até que ponto o aumento deles influencia a qualidade do modelo, será adotada a seguinte estratégia:
 1. Selecionar o 1º atributo
 2. Treinar o modelo utilizando apenas esse atributo.
 3. Verificar o valor do recall.
 4. Retornar à etapa 1, adicionando o próximo atributo na sequência
 5. Repetir o fluxo até que todos os atributos sejam utilizados.
 
-Com essa estratégia, o modelo é treinado a cada iteração com um número crescente de atributos, permitindo acompanhar como o aumento do número de variáveis influencia nas métricas de desempenho.
+### Normalizando colunas do dataset
+1. Remover espaços, tabulações e quebras de linhas das colunas
+2. Converter todos os caracteres para minúsculos
+3. Substituir espaços em branco por underscore
+4. Remover caracteres de parênteses
+```python3
+data.columns = data.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '')
+```
+No final a saída disso é o nome de todas as colunas no formato [snake_case](https://developer.mozilla.org/en-US/docs/Glossary/Snake_case), isso vai ser essencial ao comparar com o ranking de atributos relacionados com o diagnóstico.
 
-O código abaixo, desenvolvido em Python, foi utilizado para realizar o treinamento
-</br>
-</br>
-[Link para Código](/src/NaiveBayers.py)
+
+### Iteração consumindo os atributos
+Para iterar em cima das colunas disponíveis até e apresentar uma análise gráfica, foi necessário utilizar a estrutura `for` para representar a quantidade de atributos a serem utilizados. O loop irá começar com 1 coluna e vai ir até a 16º coluna.
+
+```python3
+for i in range(1, len(sorted_headers_relevance) + 1):
+```
+
+Todas as operações a seguir são feitas dentro do loop.
+Para garantir um modelo sempre limpo, para a execução anterior não atrapalhar nas métricas, dentro do loop é criado o objeto que representa o algoritmo de Naive Bayes.
+```python3
+gnb = GaussianNB()
+```
+
+E utilizando a notação de lista do python é possível pegar as primeiras colunas e extrair elas do dataframe
+```python3
+X = data[sorted_headers_relevance[:i]]
+```
+
+Separa as amostras de teste e de validação
+```python3
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, stratify=y, random_state=42)
+```
+
+Utiliza a função fit do algoritmo GaussianNB para transformar os dados, calcular as taxas de erro e ajustar os parâmetros internos. Todos esses passos são abstraídos pela biblioteca.
+```python3
+gnb.fit(X_train, y_train)
+```
+
+E agora com o modelo pronto, deve ser analisado como ele se comporta com novos dados. Então o restante dos dados é utilizado para validação.
+```python3
+y_pred = gnb.predict(X_test)
+```
+
+Com a predição do modelo é possível calcular as métricas de qualidade.
+```python3
+recall_0 = recall_score(y_test, y_pred, pos_label=0)
+recall_1 = recall_score(y_test, y_pred, pos_label=1)
+accuracy = accuracy_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+```
+
+As métricas são salvas em uma lista no formato (número de atributos, valor da métrica), isso será útil para construir o gráfico de evolução do modelo baseado na quantidade de atributos.
+```python3
+recall_class_0.append((i, recall_0))
+recall_class_1.append((i, recall_1))
+model_accuracy.append((i, accuracy))
+f1_score_ls.append((i, f1))
+```
+
+
+### Exibição dos gráficos
+Contendo várias listas que apresentam o formato (número de atributos, valor da métrica), elas devem ser convertidas para dataframes para permitir melhor integração com a biblioteca de gráficos.
+```python3
+recall_df_0 = pd.DataFrame(recall_class_0, columns=['Number of Features', 'Recall Class 0'])
+recall_df_1 = pd.DataFrame(recall_class_1, columns=['Number of Features', 'Recall Class 1'])
+accuracy_df = pd.DataFrame(model_accuracy, columns=['Number of Features', 'Accuracy'])
+f1_df = pd.DataFrame(f1_score_ls, columns=['Number of Features', 'F1 Score'])
+```
+
+
+Define um tamanho para a imagem
+```python3
+plt.figure(figsize=(10, 6))
+```
+
+Adiciona as várias linhas no gráfico, diferenciando pela cor
+```python3
+plt.plot(recall_df_0['Number of Features'], recall_df_0['Recall Class 0'], label='Recall Class 0', marker='o', linestyle='-', color='b')
+plt.plot(recall_df_1['Number of Features'], recall_df_1['Recall Class 1'], label='Recall Class 1', marker='o', linestyle='-', color='r')
+plt.plot(accuracy_df['Number of Features'], accuracy_df['Accuracy'], label='Accuracy', marker='o', linestyle='-', color='g')
+plt.plot(f1_df['Number of Features'], f1_df['F1 Score'], label='F1 Score', marker='o', linestyle='-', color='y')
+```
+
+
+Configura informações de legenda para melhor legibilidade do gráfico
+```python3
+plt.title('Recall vs Number of Features for Class 0 and Class 1')
+plt.xlabel('Number of Features')
+plt.ylabel('Metrics')
+plt.grid(True)
+plt.legend()
+```
+
+Exibe o gráfico de resultado
+```python3
+plt.plot()
+```
+
+
+O código completo pode ser conferido aqui [Link para Código](/src/NaiveBayers.py)
 
 ## Random Forest
 
