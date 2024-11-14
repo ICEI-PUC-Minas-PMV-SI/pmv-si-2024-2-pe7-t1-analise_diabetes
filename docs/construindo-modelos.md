@@ -52,13 +52,13 @@ Explore aspectos específicos, como o ajuste dos parâmetros livres de cada algo
 Como parte da comprovação de construção dos modelos, um vídeo de demonstração com todas as etapas de pré-processamento e de execução dos modelos deverá ser entregue. Este vídeo poderá ser do tipo _screencast_ e é imprescindível a narração contemplando a demonstração de todas as etapas realizadas. -->
 
 - <h3>Naive Bayers</h3>
-O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi escolhido por tratar todas as variáveis de entrada como independentes entre si, mesmo que na prática isso nem sempre seja verdade. Essa simplicidade fez do Naive Bayes um modelo atrativo, rápido e eficiente para classificação, especialmente com dados categóricos e binários como o dataset analisado.
+O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi selecionado por tratar todas as variáveis de entrada como independentes entre si, mesmo que, na prática, essa suposição nem sempre seja válida. Essa simplicidade torna o Naive Bayes um modelo atrativo, rápido e eficiente para tarefas de classificação, especialmente com dados categóricos e binários, como os presentes no dataset analisado.
 
-Ultilizamos o objeto GaussianNB que assume que os atributos seguem uma distribuição normal para cada classe, como no nosso caso temos o atributo idade e não queremos transformar em faixa etária para não perder detalhes, seguimos com esse algoritmo, em específico para esse valor deu certo pois a idade segue uma distribuição normal.
+Foi utilizado o objeto GaussianNB, que assume que os atributos seguem uma distribuição normal para cada classe. Como o dataset inclui a variável "idade" e, para preservar os detalhes, optou-se por não convertê-la em faixas etárias, esse algoritmo se mostrou adequado, dado que a "idade" apresenta uma distribuição aproximadamente normal.
 
-Verificando o heatmap abaixo notamos uma nescessidade ordenar as colunas pelo valor de correlação com a classificação de diabetes.
+A análise do heatmap indicou a necessidade de ordenar as colunas de acordo com o valor de correlação com a classificação de diabetes.
 </br> </br>![Heatmap correlação variáveis](/docs/img/heatmap.png) </br> </br>
-Seguindo essa lógica temos a seguinte ordem:
+Seguindo essa lógica, as variáveis foram ordenadas com base no valor de correlação com a classificação de diabetes, priorizando aquelas que apresentaram maior influência na determinação da presença ou ausência da condição. A lista abaixo reflete essa priorização:
 
 1. polyuria
 2. polydipsia
@@ -77,7 +77,7 @@ Seguindo essa lógica temos a seguinte ordem:
 15. delayed_healing
 16. itching
   
-Possuímos muitos atributos, para analizarmos até que ponto o aumento deles influencia a qualidade do modelo usaremos a seguinte estratégia:
+Devido à presença de diversos atributos, para analisar até que ponto o aumento deles influencia a qualidade do modelo, será adotada a seguinte estratégia:
 
 1. Selecionar o 1º atributo
 2. Treinar o modelo somente com ele
