@@ -83,7 +83,7 @@ Explore aspectos específicos, como o ajuste dos parâmetros livres de cada algo
 
 Como parte da comprovação de construção dos modelos, um vídeo de demonstração com todas as etapas de pré-processamento e de execução dos modelos deverá ser entregue. Este vídeo poderá ser do tipo _screencast_ e é imprescindível a narração contemplando a demonstração de todas as etapas realizadas. -->
 
-- <h3>Naive bayes</h3>
+## Naive bayes
 O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi selecionado por tratar todas as variáveis de entrada como independentes entre si, mesmo que, na prática, essa suposição nem sempre seja válida. Essa simplicidade torna o Naive Bayes um modelo atrativo, rápido e eficiente para tarefas de classificação, especialmente com dados categóricos e binários, como os presentes no dataset analisado.
 
 Foi utilizado o objeto GaussianNB, que assume que os atributos seguem uma distribuição normal para cada classe. Como o dataset inclui a variável "idade" e, para preservar os detalhes, optou-se por não convertê-la em faixas etárias, esse algoritmo se mostrou adequado, dado que a "idade" apresenta uma distribuição aproximadamente normal.
@@ -124,9 +124,9 @@ O código abaixo, desenvolvido em Python, foi utilizado para realizar o treiname
 </br>
 [Link para Código](/src/NaiveBayers.py)
 
-- <h3>Random Forest</h3>
+## Random Forest
 
-- <h3>Decision Tree</h3>
+## Decision Tree
 
 # Avaliação dos modelos criados
 
@@ -134,7 +134,7 @@ O código abaixo, desenvolvido em Python, foi utilizado para realizar o treiname
 
 <!--Nesta seção, as métricas utilizadas para avaliar os modelos desenvolvidos deverão ser apresentadas (p. ex.: acurácia, precisão, recall, F1-Score, MSE etc.). A escolha de cada métrica deverá ser justificada, pois esta escolha é essencial para avaliar de forma mais assertiva a qualidade do modelo construído. -->
 
-- <h3>Naive bayes</h3>
+### Naive bayes
 
 A escolha do recall como métrica principal para a classificação de diabetes é justificada pelo fato de que, nesse contexto, o objetivo é minimizar falsos negativos. Um falso negativo indicaria que uma pessoa com diabetes seria incorretamente classificada como não diabética, o que poderia resultar em consequências graves, uma vez que o tratamento adequado não seria administrado.
 
@@ -145,15 +145,15 @@ Razões principais para usar o recall:
 1. Impacto crítico de falsos negativos: No diagnóstico de doenças como o diabetes, deixar de identificar uma pessoa doente pode levar a complicações de saúde sérias e ao agravamento da doença.
 2. Prioridade na detecção de casos positivos: O recall foca em identificar corretamente todos os casos de diabetes, mesmo que isso aumente a chance de alguns falsos positivos, o que é mais aceitável nesse cenário. Portanto, o uso do recall é adequado quando a minimização de falsos negativos é a prioridade, como no caso da classificação de doenças como diabetes.
 
-- <h3>Random Forest</h3>
+### Random Forest
 
-- <h3>Decision Tree</h3>
+### Decision Tree
 
 ## Discussão dos resultados obtidos
 
 <!--Nesta seção, discuta os resultados obtidos pelos modelos construídos, no contexto prático em que os dados se inserem, promovendo uma compreensão abrangente e aprofundada da qualidade de cada um deles. Lembre-se de relacionar os resultados obtidos ao problema identificado, a questão de pesquisa levantada e estabelecendo relação com os objetivos previamente propostos. -->
 
-- <h3>Naive bayes</h3> 
+### Naive bayes 
 
 O gráfico abaixo mostra o desempenho de um modelo de Naive Bayes em função do número de características usadas, com quatro métricas principais plotadas: Revocação para a Classe 0, Revocação para a Classe 1, Acurácia e F1 Score.
 
@@ -167,9 +167,9 @@ Por outro lado, o recall para a Classe 1 geralmente melhora à medida que mais c
 
 Portanto, a análise sugere que o uso de aproximadamente 3 a 6 características é ideal para o classificador Naive Bayes, proporcionando um bom equilíbrio com alta revocação para a Classe 1, estabilidade na acurácia e no F1 Score, sem uma perda significativa de revocação para a Classe 0.
 
-- <h3>Random Forest</h3>
+### Random Forest
 
-- <h3>Decision Tree</h3>
+### Decision Tree
 
 # Pipeline de pesquisa e análise de dados
 
