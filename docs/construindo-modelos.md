@@ -80,13 +80,14 @@ Seguindo essa lógica, as variáveis foram ordenadas com base no valor de correl
 Devido à presença de diversos atributos, para analisar até que ponto o aumento deles influencia a qualidade do modelo, será adotada a seguinte estratégia:
 
 1. Selecionar o 1º atributo
-2. Treinar o modelo somente com ele
-3. Verificar o recall
-4. Voltar para etapa 1 mas agora treinar utilizando mais um atributo
-5. Seguir o fluxo até finalizar a quantidade de atributos
-6. Usando essa estratégia a cada vez o modelo vai ser treinado e poderemos acompanhar como o aumento do número de atributos influência nossas métricas.
+2. Treinar o modelo utilizando apenas esse atributo.
+3. Verificar o valor do recall.
+4. Retornar à etapa 1, adicionando o próximo atributo na sequência
+5. Repetir o fluxo até que todos os atributos sejam utilizados.
 
-O Código a seguir feito na linguagem python foi usado para a execução do treinamento desse modelo. 
+Com essa estratégia, o modelo é treinado a cada iteração com um número crescente de atributos, permitindo acompanhar como o aumento do número de variáveis influencia nas métricas de desempenho.
+
+O código abaixo, desenvolvido em Python, foi utilizado para realizar o treinamento
 </br>
 </br>
 [Link para Código](/src/NaiveBayers.py)
@@ -109,8 +110,8 @@ O recall avalia a capacidade do modelo de detectar corretamente todos os casos p
 
 Razões principais para usar o recall:
 
-1- Impacto crítico de falsos negativos: No diagnóstico de doenças como o diabetes, deixar de identificar uma pessoa doente pode levar a complicações de saúde sérias e ao agravamento da doença.
-2- Prioridade na detecção de casos positivos: O recall foca em identificar corretamente todos os casos de diabetes, mesmo que isso aumente a chance de alguns falsos positivos, o que é mais aceitável nesse cenário. Portanto, o uso do recall é adequado quando a minimização de falsos negativos é a prioridade, como no caso da classificação de doenças como diabetes.
+1. Impacto crítico de falsos negativos: No diagnóstico de doenças como o diabetes, deixar de identificar uma pessoa doente pode levar a complicações de saúde sérias e ao agravamento da doença.
+2. Prioridade na detecção de casos positivos: O recall foca em identificar corretamente todos os casos de diabetes, mesmo que isso aumente a chance de alguns falsos positivos, o que é mais aceitável nesse cenário. Portanto, o uso do recall é adequado quando a minimização de falsos negativos é a prioridade, como no caso da classificação de doenças como diabetes.
 
 - <h3>Random Forest</h3>
 
