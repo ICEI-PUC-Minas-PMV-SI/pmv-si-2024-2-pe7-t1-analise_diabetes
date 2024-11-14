@@ -60,7 +60,7 @@ for i in range(1, len(sorted_headers_relevance) + 1):
     X = data[sorted_headers_relevance[:i]]
 
     # Separar os dados em treino e teste usando estratificação pela "class"
-    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.3, stratify=y, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, stratify=y, random_state=42)
 
     # Treinar o modelo
     gnb.fit(X_train, y_train)
