@@ -27,18 +27,50 @@ Algumas das etapas podem estar relacionadas à:
 * Entre outras....
 
 Avalie quais etapas são importantes para o contexto dos dados que você está trabalhando, pois a qualidade dos dados e a eficácia do pré-processamento desempenham um papel fundamental no sucesso de modelo(s) de aprendizado de máquina. É importante entender o contexto do problema e ajustar as etapas de preparação de dados de acordo com as necessidades específicas de cada projeto. -->
+## Naive bayes
 
 Para a preparação dos dados no treinamento de modelos de machine learning, foram seguidos dois passos principais:
 
-1. Codificação de categorias binárias
+### Codificação de categorias
+Para codificar as categorias binárias foi usado a estratégia de _label encoding_, onde colunas categóricas serão convertidas para atributos numéricos
+```python3
+# Aqui as colunas são normalizadas para o processamento seguinte
+data = pd.read_csv('../dataset-full.csv')
+data.columns = data.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '')
+........
+# Aqui um objeto da classe LabelEncoder é criado, ele é o responsável por converter os atributos Yes e No para 0 e 1 respectivamente
+label_encoder = LabelEncoder()
+
+# O gênero é convertido manualmente pois o a classe de processamento LabelEncoder não suporta nativamente Male e Female
+data['gender'] = data['gender'].map({'Male': 1, 'Female': 2})
+
+# Finalmente ao realizar um loop na lista de atributos do dataset todos são categorizados
+for column in sorted_headers_relevance + ['class']:
+    data[column] = label_encoder.fit_transform(data[column])
+```
+
 As características categóricas foram transformadas em valores numéricos para facilitar o cálculo de probabilidades pelos algoritmos. Campos como "Sim" e "Não" foram codificados como 1 e 0, respectivamente, e a mesma lógica foi aplicada às variáveis "classe" (positivo e negativo para risco de diabetes) e "gênero" (masculino e feminino).
 
-2. Separação dos dados
+Sobre o gênero é importante notar que foi definido Male = 1 e Female = 2, essa escolha não apresenta efeitos colaterais na análise, desde que os rótulos sejam respeitados durante todo o ciclo de vida do modelo.
+
+A idade foi preservada e não foi convertida para uma categoria.
+
+### Separação dos dados
 O conjunto de dados foi dividido em 70% para treinamento e 30% para teste, permitindo que o modelo aprenda com a maior parte dos dados enquanto é testado em dados inéditos.
 
-O Código a seguir feito na linguagem python foi usado como base para a preparação dos dados de maneira geral. 
+```python3
+ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.3, stratify=y, random_state=42)
+```
+Utilizando da função `tran_test_split` que é capaz de separar a base de dados em uma porção de teste e outra porção para validação. Do parâmetros utilizados os mais importantes são:
+
+- train_size: Descreve o valor da proporção em que o dataset irá ser quebrado, nesse caso o valor 0.3, representa o mesmo que 30%. Logo 30% será separado para testes e 0% para validação.
+- stratify: Realiza amostragem estratificada pela classificação de diabetes. isso significa que a mesma proporção de diagnósticos positivos e negativos que existe no dataset completo será utilizado na amostra de testes e consequentemente na amostra de validação.
+- random_state: É uma semente utilizada para construir números pseudoaleatórios, sendo assim em toda execução os mesmos dados de testes serão extraídos.
+
+
 </br>
 </br>
+
 [Link para Código de preparação Simplificado](/src/dataPreparation.py)
 
 # Descrição dos modelos
@@ -51,7 +83,7 @@ Explore aspectos específicos, como o ajuste dos parâmetros livres de cada algo
 
 Como parte da comprovação de construção dos modelos, um vídeo de demonstração com todas as etapas de pré-processamento e de execução dos modelos deverá ser entregue. Este vídeo poderá ser do tipo _screencast_ e é imprescindível a narração contemplando a demonstração de todas as etapas realizadas. -->
 
-- <h3>Naive Bayers</h3>
+- <h3>Naive bayes</h3>
 O algoritmo Naive Bayes, baseado no Teorema de Bayes, foi selecionado por tratar todas as variáveis de entrada como independentes entre si, mesmo que, na prática, essa suposição nem sempre seja válida. Essa simplicidade torna o Naive Bayes um modelo atrativo, rápido e eficiente para tarefas de classificação, especialmente com dados categóricos e binários, como os presentes no dataset analisado.
 
 Foi utilizado o objeto GaussianNB, que assume que os atributos seguem uma distribuição normal para cada classe. Como o dataset inclui a variável "idade" e, para preservar os detalhes, optou-se por não convertê-la em faixas etárias, esse algoritmo se mostrou adequado, dado que a "idade" apresenta uma distribuição aproximadamente normal.
@@ -102,7 +134,7 @@ O código abaixo, desenvolvido em Python, foi utilizado para realizar o treiname
 
 <!--Nesta seção, as métricas utilizadas para avaliar os modelos desenvolvidos deverão ser apresentadas (p. ex.: acurácia, precisão, recall, F1-Score, MSE etc.). A escolha de cada métrica deverá ser justificada, pois esta escolha é essencial para avaliar de forma mais assertiva a qualidade do modelo construído. -->
 
-- <h3>Naive Bayers</h3>
+- <h3>Naive bayes</h3>
 
 A escolha do recall como métrica principal para a classificação de diabetes é justificada pelo fato de que, nesse contexto, o objetivo é minimizar falsos negativos. Um falso negativo indicaria que uma pessoa com diabetes seria incorretamente classificada como não diabética, o que poderia resultar em consequências graves, uma vez que o tratamento adequado não seria administrado.
 
@@ -121,7 +153,7 @@ Razões principais para usar o recall:
 
 <!--Nesta seção, discuta os resultados obtidos pelos modelos construídos, no contexto prático em que os dados se inserem, promovendo uma compreensão abrangente e aprofundada da qualidade de cada um deles. Lembre-se de relacionar os resultados obtidos ao problema identificado, a questão de pesquisa levantada e estabelecendo relação com os objetivos previamente propostos. -->
 
-- <h3>Naive Bayers</h3> 
+- <h3>Naive bayes</h3> 
 
 O gráfico abaixo mostra o desempenho de um modelo de Naive Bayes em função do número de características usadas, com quatro métricas principais plotadas: Revocação para a Classe 0, Revocação para a Classe 1, Acurácia e F1 Score.
 
