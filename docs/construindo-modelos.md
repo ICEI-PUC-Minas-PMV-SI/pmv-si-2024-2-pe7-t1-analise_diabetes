@@ -195,7 +195,7 @@ No final a saída disso é o nome de todas as colunas no formato [snake_case](ht
 
 
 ### Iteração consumindo os atributos
-Para iterar em cima das colunas disponíveis até e apresentar uma análise gráfica, foi necessário utilizar a estrutura `for` para representar a quantidade de atributos a serem utilizados. O loop irá começar com 1 coluna e vai ir até a 16º coluna.
+Para iterar sobre as colunas disponíveis e apresentar uma análise gráfica, foi utilizada a estrutura `for`, que permite controlar a quantidade de atributos a serem utilizados no modelo. O loop começa com 1 coluna e segue até a 16ª coluna, incrementando a cada iteração. Essa abordagem permite treinar o modelo progressivamente, ajustando o número de atributos e avaliando o impacto nas métricas de desempenho, como o recall. O gráfico gerado ao final mostrará como a inclusão de atributos adicionais influencia a performance do modelo à medida que mais colunas são adicionadas.
 
 ```python3
 for i in range(1, len(sorted_headers_relevance) + 1):
