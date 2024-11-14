@@ -103,9 +103,9 @@ O Código a seguir feito na linguagem python foi usado para a execução do trei
 
 - <h3>Naive Bayers</h3>
 
-A escolha do recall como métrica principal para a classificação de diabetes se justifica pelo fato de que, nesse contexto, o objetivo é evitar falsos negativos. Um falso negativo significa que uma pessoa que tem diabetes seria incorretamente classificada como não diabética, o que pode levar a consequências graves, já que ela não receberia o tratamento adequado.
+A escolha do recall como métrica principal para a classificação de diabetes é justificada pelo fato de que, nesse contexto, o objetivo é minimizar falsos negativos. Um falso negativo indicaria que uma pessoa com diabetes seria incorretamente classificada como não diabética, o que poderia resultar em consequências graves, uma vez que o tratamento adequado não seria administrado.
 
-O recall mede a capacidade do modelo de detectar corretamente todos os casos positivos (diabetes), ou seja, a proporção de verdadeiros positivos em relação ao total de casos que realmente são positivos. Um recall alto significa que o modelo consegue identificar a maioria das pessoas com diabetes, reduzindo ao máximo os falsos negativos.
+O recall avalia a capacidade do modelo de detectar corretamente todos os casos positivos (diabetes), medindo a proporção de verdadeiros positivos em relação ao total de casos que realmente são positivos. Um recall elevado indica que o modelo é eficiente em identificar a maioria dos indivíduos com diabetes, reduzindo ao máximo a ocorrência de falsos negativos.
 
 Razões principais para usar o recall:
 
@@ -126,12 +126,13 @@ O gráfico abaixo mostra o desempenho de um modelo de Naive Bayes em função do
 
 </br> </br>![Resultado Naive Byers](/docs/img/NbMetrics.png) </br> </br>
 
-Focaremos a análise nas linhas vermelhas e azul para os atributos de recall.
+A análise será direcionada para as linhas vermelhas e azuis que representam os atributos de recall.
 
-Inicialmente, o recall para a Classe 0 mostra um ligeiro aumento, atingindo o pico em torno de 3 características. Após 3 características, o recall para a Classe 0 apresenta uma queda acentuada quando o número de características é de cerca de 5, depois estabiliza em um nível mais baixo à medida que as características aumentam. Isso indica que o aumento no número de características não ajuda a melhorar o recall para a Classe 0 após um certo ponto, potencialmente devido a overfitting ou características não informativas para esta classe. </br> </br>
-Já o recall para a Classe 1 geralmente aumenta à medida que o número de características cresce, atingindo o pico entre 3 e 6 características e estabilizando-se em um valor alto a partir de então. O modelo parece ser melhor em identificar instâncias da Classe 1 à medida que mais características são adicionadas, embora essa tendência eventualmente se estabilize. Isso pode sugerir que o modelo se beneficia mais de características adicionais para a Classe 1 do que para a Classe 0.
+Inicialmente, o recall para a Classe 0 apresenta um ligeiro aumento, atingindo o pico em torno de 3 características. Após esse ponto, há uma queda acentuada no recall quando o número de características chega a aproximadamente 5, seguido por uma estabilização em um nível mais baixo à medida que mais características são incluídas. Esse comportamento indica que o aumento no número de características não contribui para melhorar o recall da Classe 0 após certo ponto, possivelmente devido a overfitting ou à inclusão de características que não são informativas para essa classe.
 
-Logo, nossa análise sugere que o uso de cerca de 3 a 6 características proporciona um bom equilíbrio para o classificador Naive Bayes, gerando alta revocação para a Classe 1, acurácia estável e F1 Score, sem perda significativa de revocação para a Classe 0.
+Por outro lado, o recall para a Classe 1 geralmente melhora à medida que mais características são adicionadas, atingindo um pico entre 3 e 6 características e, em seguida, estabilizando-se em um nível elevado. Isso sugere que o modelo se torna mais eficaz em identificar instâncias da Classe 1 com a adição de mais atributos, embora essa melhora eventual se estabilize, indicando que atributos adicionais oferecem menos benefícios após um determinado ponto.
+
+Portanto, a análise sugere que o uso de aproximadamente 3 a 6 características é ideal para o classificador Naive Bayes, proporcionando um bom equilíbrio com alta revocação para a Classe 1, estabilidade na acurácia e no F1 Score, sem uma perda significativa de revocação para a Classe 0.
 
 - <h3>Random Forest</h3>
 
