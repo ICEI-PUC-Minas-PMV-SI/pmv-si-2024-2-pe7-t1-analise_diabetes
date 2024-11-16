@@ -1,4 +1,4 @@
-# TÍTULO DO PROJETO.
+# Uso de Machine Learning Para Diagnostico de Diabetes.
 
 `CURSO: Sistemas de Informação`
 
@@ -6,7 +6,7 @@
 
 `SEMESTRE: 7º`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O projeto tem como objetivo desenvolver uma solução baseada em algoritmos de machine learning para avaliar a probabilidade de um indivíduo desenvolver diabetes. A partir de um conjunto de características fornecidas sobre o estilo de vida, condições de saúde, histórico familiar e outros fatores relevantes do paciente, o sistema realizará análises preditivas para identificar o risco de ocorrência da doença. Essa abordagem permitirá não apenas a detecção precoce de possíveis casos, mas também fornecerá informações úteis para intervenções preventivas e personalizadas, promovendo uma melhor qualidade de vida e a redução de complicações associadas ao diabetes.
 
 ## Integrantes
 
