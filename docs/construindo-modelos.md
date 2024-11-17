@@ -287,6 +287,60 @@ O código completo pode ser conferido aqui [Link para Código](/src/NaiveBayers.
 
 ## Random Forest
 
+Floresta Aleatória, ou Florestas de Decisão Aleatórias, é um método de aprendizado de conjunto utilizado para tarefas de classificação, regressão e outras análises preditivas [^1]. Uma hipótese para o uso do Random Forest é que sua capacidade de combinar múltiplas árvores de decisão pode gerar previsões mais estáveis e confiáveis, mesmo em cenários com dados complexos ou ruidosos [^2]. Dessa forma, optei por testar esta abordagem da seguinte forma:
+
+```
+%pip install pandas scikit-learn
+%pip install graphviz pydotplus
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import export_graphviz
+from sklearn.metrics import accuracy_score, classification_report
+import pydotplus
+from IPython.display import Image
+import graphviz
+```
+
+Iniciei com a instalação das bibliotecas necessárias para manipulação de dados, criação do modelo de aprendizado de máquina Random Forest e visualização das árvores de decisão, utilizando ferramentas como pandas, scikit-learn, graphviz e pydotplus, além de integrar a função Image para exibição das visualizações no ambiente de desenvolvimento.
+
+```
+path = '/content/diabetes_risk_prediction_dataset.csv'
+
+dados = pd.read_csv(path)
+
+X = dados.drop('class', axis=1)
+y = dados['class']
+```
+Carreguei o conjunto de dados a partir de um arquivo CSV para trabalhar com as informações sobre o risco de diabetes. Separei as colunas de dados em duas partes: as colunas com as características dos pacientes, como idade, níveis de glicose, pressão arterial, etc., que foram colocadas na variável X; e a coluna 'class', que indica se a pessoa tem ou não diabetes, que foi colocada na variável y. A coluna 'class' foi escolhida para y porque ela contém o que queremos prever: se a pessoa tem diabetes (1) ou não (0). Essa separação é necessária para que o modelo de aprendizado de máquina consiga aprender com as características dos pacientes e fazer previsões sobre o risco de diabetes com base nos dados fornecidos.
+```
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+Dividi os dados em dois conjuntos: um para treinar o modelo e outro para testar o desempenho do modelo depois de treinado. Usei a função train_test_split para fazer essa divisão, onde 80% dos dados foram destinados ao treinamento do modelo e 20% foram reservados para testar as previsões do modelo, o que é especificado pelo parâmetro test_size=0.2. A divisão foi feita de forma aleatória, mas para garantir que os resultados sejam reproduzíveis, usei o parâmetro random_state=42, que fixa a semente da aleatoriedade. Dessa forma, qualquer pessoa que rodar o código terá a mesma divisão dos dados.
+
+```
+modelo = RandomForestClassifier(n_estimators=100, random_state=42)
+modelo.fit(X_train, y_train)
+```
+Neste trecho eu crio o modelo de aprendizado de máquina usando o algoritmo Random Forest. Defini que o modelo deveria ter 100 árvores (n_estimators=100), o que ajuda a melhorar a precisão das previsões. Além disso, fixei a semente da aleatoriedade com random_state=42, garantindo que os resultados possam ser reproduzidos. Em seguida, treinei o modelo utilizando os dados de treinamento (X_train e y_train), ou seja, fiz o modelo aprender a partir das características dos pacientes e seus respectivos diagnósticos de diabetes.
+
+Importante dizer que a função `RandomForestClassifier` oferece outros parâmetros que podem ser ajustados para otimizar o desempenho do modelo. No entanto, neste momento, optei por utilizar os valores padrão para simplificar a configuração inicial e focar na implementação.
+
+```
+y_pred = modelo.predict(X_test)
+
+precisao = accuracy_score(y_test, y_pred)
+relatorio_classificacao = classification_report(y_test, y_pred)
+
+print(f'A precisão do modelo é: {precisao:.2f}')
+print("\nRelatório de Classificação:")
+print(relatorio_classificacao)
+```
+Aqui eu utilizei o modelo treinado para fazer previsões com os dados de teste, armazenando os resultados na variável y_pred. Em seguida, calculei a precisão do modelo utilizando a função accuracy_score, que compara as previsões feitas (y_pred) com os valores reais de teste (y_test). Também gerei um relatório detalhado de classificação com a função classification_report, que fornece métricas como precisão, recall e F1-score para cada classe. Por fim, imprimi a precisão do modelo e o relatório de classificação para avaliar seu desempenho nas previsões do risco de diabetes.
+
+É possível verificar o código completo [neste link](/src/random-forest.ipynb).
+
+
 ## Decision Tree
 
 # Avaliação dos modelos criados
@@ -307,6 +361,7 @@ Razões principais para usar o recall:
 2. Prioridade na detecção de casos positivos: O recall foca em identificar corretamente todos os casos de diabetes, mesmo que isso aumente a chance de alguns falsos positivos, o que é mais aceitável nesse cenário. Portanto, o uso do recall é adequado quando a minimização de falsos negativos é a prioridade, como no caso da classificação de doenças como diabetes.
 
 ### Random Forest
+As métricas de precisão, recall e F1-Score foram escolhidas para avaliar o modelo Random Forest porque elas fornecem uma visão completa de seu desempenho. A precisão mostra a porcentagem de acertos nas previsões do modelo, enquanto o recall foca em quantos casos de diabetes o modelo conseguiu identificar corretamente. Já o F1-Score é uma média entre a precisão e o recall
 
 ### Decision Tree
 
@@ -329,6 +384,51 @@ Por outro lado, o recall para a Classe 1 geralmente melhora à medida que mais c
 Portanto, a análise sugere que o uso de aproximadamente 3 a 6 características é ideal para o classificador Naive Bayes, proporcionando um bom equilíbrio com alta revocação para a Classe 1, estabilidade na acurácia e no F1 Score, sem uma perda significativa de revocação para a Classe 0.
 
 ### Random Forest
+![Resultado Random Forest](https://github.com/user-attachments/assets/32370f24-8340-48d6-b4e0-a3bc09ef377c)
+
+O resultado indica que o modelo apresenta um bom desempenho, com uma precisão geral de 99%, o que significa que ele acertou 99% das previsões. No relatório de classificação, para a classe 0 (sem diabetes), o modelo obteve uma precisão de 97%, recall de 100% e F1-score de 99%, indicando que ele identificou corretamente quase todas as pessoas sem diabetes, com poucos erros de classificação. Para a classe 1 (com diabetes), a precisão foi de 100%, recall de 99% e F1-score de 99%, demonstrando que o modelo foi eficaz em identificar corretamente as pessoas com diabetes, com uma pequena margem de erro. As médias ponderadas de precisão, recall e F1-score ficaram em 99%, o que sugere que o modelo teve um desempenho equilibrado e consistente em ambas as classes.
+
+![Decision Tree](https://github.com/user-attachments/assets/ea92d959-7c2d-4aa4-9910-c510048ad97b)
+
+```
+dot_data = export_graphviz(
+    arvore,
+    out_file=None,
+    feature_names=X.columns,
+    class_names=['Sem Diabetes', 'Com Diabetes'],
+    filled=True, rounded=True,
+    special_characters=True
+)
+
+graph = pydotplus.graph_from_dot_data(dot_data)
+Image(graph.create_png())
+
+```
+Também foi criado um gráfico auxiliar para demonstrar a árvore de decisão utilizada pelo algoritmo. É possível notar que a classificação depende de diversas características, começando pela variável "Polyuria". Se "Polyuria" é menor ou igual a 0.5, o modelo analisa "Gender" e "Age", resultando principalmente em classificação como "No Diabets", destacado em azul. Se "Polyuria" é maior que 0.5, o foco passa para "Diabets" e "Polydipsia", com uma tendência a classificar como "Diabets", refletido em laranja.
+
+Outro gráfico interessante foi criado para mostrar a importância de cada atributo para a correta identificação de casos de diabetes:
+
+![Image](https://github.com/user-attachments/assets/2e62e1c8-a8a4-4872-abf5-8043dd62d98f)
+```
+import matplotlib.pyplot as plt
+import numpy as np
+
+importancias = modelo.feature_importances_
+
+indices = np.argsort(importancias)[::-1]
+nomes_features = [X.columns[i] for i in indices]
+
+plt.figure(figsize=(10, 6))
+plt.title("Importância dos atributos")
+plt.barh(range(X.shape[1]), importancias[indices], align="center")
+plt.yticks(range(X.shape[1]), nomes_features)
+plt.xlabel("Importância")
+plt.gca().invert_yaxis()
+plt.show()
+
+```
+Ficou evidente que assim como haviamos feito as analises dos dados anteriormente, Polydipsia e Polyuria são os atributos mais determinantes para prever se uma pessoa tem ou não diabtes. No entanto, foi surpreendente para nós que a idade também é um fato decisivo, já que na etapa de conhecimento dos dados, esta informação não era óbvia de ser identificada.
+
 
 ### Decision Tree
 
@@ -341,3 +441,8 @@ Em pesquisa e experimentação em sistemas de informação, um pipeline de pesqu
 Todas as tarefas realizadas nesta etapa deverão ser registradas em formato de texto junto com suas explicações de forma a apresentar  os códigos desenvolvidos e também, o código deverá ser incluído, na íntegra, na pasta "src".
 
 Além disso, deverá ser entregue um vídeo onde deverão ser descritas todas as etapas realizadas. O vídeo, que não tem limite de tempo, deverá ser apresentado por **todos os integrantes da equipe**, de forma que, cada integrante tenha oportunidade de apresentar o que desenvolveu e as  percepções obtidas.
+
+
+# Referências
+[^1]: [Floresta aleatória](https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria)
+[^2]: [What is random forest?](https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria)
