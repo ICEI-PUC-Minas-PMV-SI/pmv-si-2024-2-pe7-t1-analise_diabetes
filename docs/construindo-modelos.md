@@ -707,7 +707,49 @@ Dois testes foram realizados utilizando os mesmos parâmetros: o primeiro com a 
 
 # Pipeline de pesquisa e análise de dados
 
-Em pesquisa e experimentação em sistemas de informação, um pipeline de pesquisa e análise de dados refere-se a um conjunto organizado de processos e etapas que um profissional segue para realizar a coleta, preparação, análise e interpretação de dados durante a fase de pesquisa e desenvolvimento de modelos. Esse pipeline é essencial para extrair _insights_ significativos, entender a natureza dos dados e, construir modelos de aprendizado de máquina eficazes. 
+<!--Em pesquisa e experimentação em sistemas de informação, um pipeline de pesquisa e análise de dados refere-se a um conjunto organizado de processos e etapas que um profissional segue para realizar a coleta, preparação, análise e interpretação de dados durante a fase de pesquisa e desenvolvimento de modelos. Esse pipeline é essencial para extrair _insights_ significativos, entender a natureza dos dados e, construir modelos de aprendizado de máquina eficazes.  -->
+
+A pipeline de pesquisa se deu da seguinte forma: </br>
+
+1. **Carregamento e exploração do dataset:** </br></br>
+   O dataset foi carregado em memória virtual, e as primeiras análises exploratórias foram realizadas para identificar possíveis inconsistências, dados ausentes ou características que precisassem de ajustes. Foi avaliado também o balanceamento inicial das classes, considerando a disparidade entre casos positivos (pessoas com diabetes) e negativos (pessoas sem diabetes).
+
+2. **Pré-processamento dos dados:**
+ - As variáveis categóricas, como o gênero dos indivíduos pesquisados e os sintomas apresentados (registrados originalmente como texto), foram convertidas em valores binários para que os modelos de machine learning pudessem processá-los.
+ - Valores ausentes foram preenchidos com a mediana ou outros métodos adequados, garantindo que o dataset estivesse completo.
+ - Para lidar com o desequilíbrio entre as classes (número desigual de casos positivos e negativos), foi aplicado o SMOTE (Synthetic Minority Oversampling Technique). Essa abordagem gerou exemplos sintéticos para a classe minoritária, balanceando os dados e permitindo que os modelos fossem treinados de forma mais eficaz.
+
+3. **Treinamento dos modelos:**
+   Três algoritmos de aprendizado supervisionado foram testados:
+
+- Naive Bayes
+- Decision Tree
+- Random Forest
+  
+Cada modelo foi treinado com os dados processados e balanceados, ajustando os hiperparâmetros para alcançar o melhor desempenho possível. Durante o treinamento, foi realizado um cuidado especial para evitar overfitting, especialmente nos modelos baseados em árvores.
+
+4. **Análise dos resultados:**
+Após o treinamento, os modelos foram avaliados com base em métricas como acurácia, precisão, recall e F1-Score para ambas as classes (positiva e negativa). Além disso, foi feita uma análise qualitativa para identificar a robustez de cada modelo em diferentes cenários.  
+
+## Resultados Obtidos
+
+- Naive Bayes:
+Este modelo apresentou o menor desempenho em termos de acurácia e precisão. Embora seja rápido e eficiente para problemas mais simples, não conseguiu lidar bem com a complexidade das relações entre os sintomas e os diagnósticos de diabetes no dataset. Sua baixa capacidade de generalização o tornou inadequado para o propósito do projeto, levando à sua exclusão como candidato à solução final.
+
+- Decision Tree:
+O modelo Decision Tree atingiu uma acurácia e precisão geral de aproximadamente 99%, especialmente devido ao impacto positivo do balanceamento realizado com SMOTE. No entanto, a análise indicou que o modelo era altamente dependente do método de balanceamento, tornando-o menos robusto e mais sensível a mudanças nos dados de entrada. Apesar do bom desempenho, sua estabilidade foi considerada inferior em relação ao Random Forest.
+
+- Random Forest:
+Este modelo combinou múltiplas árvores de decisão, o que garantiu maior robustez e estabilidade nos resultados. O Random Forest alcançou acurácia, precisão e recall próximos de 99% para ambas as classes (diabetes positivo e negativo). Sua capacidade de generalização, mesmo diante de dados balanceados, o destacou como a melhor solução para o problema. Ele apresentou um desempenho equilibrado e consistente, conseguindo identificar tanto casos positivos quanto negativos com alta confiabilidade.
+
+## Conclusão
+Diante dos resultados obtidos:
+
+1. O Naive Bayes foi descartado devido à baixa precisão e acurácia, características inadequadas para um projeto onde a confiabilidade do diagnóstico é essencial.
+2. Embora o Decision Tree tenha apresentado desempenho competitivo, ele demonstrou sensibilidade à abordagem de balanceamento e menor robustez frente a variações nos dados.
+3. O Random Forest foi escolhido como o modelo ideal para compor a solução final. Seu desempenho consistente e equilibrado, aliado à alta capacidade de identificar casos positivos e negativos, o torna uma opção confiável para a predição de diabetes a partir de sintomas.
+Este modelo garante não apenas precisão elevada, mas também a segurança de uma aplicação robusta, adequada para uso em contextos médicos onde diagnósticos confiáveis são indispensáveis.
+
 
 ## Observações importantes
 
