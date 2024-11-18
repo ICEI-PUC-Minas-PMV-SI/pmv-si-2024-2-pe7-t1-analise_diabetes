@@ -700,9 +700,10 @@ Ficou evidente que assim como haviamos feito as analises dos dados anteriormente
 
 ### Decision Tree
 
+![Image]()
+![Image]()
 
-Dois testes foram realizados utilizando os mesmos parâmetros: o primeiro com a base balanceada por SMOTE e o segundo por meio de estratificação. Os resultados indicaram que o uso do SMOTE proporcionou maior precisão na classificação da classe 1: Positivo para diabetes. 
-
+Dois testes foram realizados utilizando os mesmos parâmetros: o primeiro com a base balanceada por SMOTE e o segundo por meio de estratificação. Os resultados indicaram que o uso do SMOTE proporcionou maior precisão na classificação da classe 1: Positivo para diabetes, para classe 0: Negativo os dois testes obtiveram o mesmo resultado. 
 
 
 # Pipeline de pesquisa e análise de dados
