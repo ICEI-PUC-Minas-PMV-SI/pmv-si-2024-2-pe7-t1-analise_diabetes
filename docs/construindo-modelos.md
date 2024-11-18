@@ -343,7 +343,7 @@ Aqui eu utilizei o modelo treinado para fazer previsões com os dados de teste, 
 
 ## Decision Tree
 
-# Primeiro Teste: SMOTE.
+# Primeiro Teste: SMOTE
 
 Uma árvore de decisão é um modelo de aprendizado de máquina baseado em uma estrutura hierárquica que organiza decisões em etapas sucessivas, de forma semelhante a um fluxograma. É usada para resolver problemas de classificação ou regressão ao dividir os dados em subconjuntos menores com base em regras de decisão derivadas dos valores das variáveis.
 
@@ -481,7 +481,134 @@ metrics = {
 
 É possível verificar o código completo [neste link](/src/decision_tree_smote.ipynb).
 
-# Segundo Teste: STRATIFY.
+# Segundo Teste: STRATIFY
+
+Para o segundo teste utilizando árvore de decisão, foi utilizado STRATIFY.
+
+Colunas do dataset ordenadas pela relevância em relação à classificação
+```python3
+sorted_headers_relevance = [
+    'polyuria', 'polydipsia', 'age', 'gender', 'sudden_weight_loss',
+    'partial_paresis', 'polyphagia', 'irritability', 'alopecia', 'visual_blurring',
+    'weakness', 'muscle_stiffness', 'genital_thrush', 'obesity', 'delayed_healing', 'itching'
+]
+```
+
+ O dataset foi carregado a partir de um arquivo CSV, contendo informações detalhadas sobre pacientes, sintomas e diagnósticos.
+```python3
+data = pd.read_csv('../dataset-full.csv')
+```
+
+ Os cabeçalhos das colunas foram renomeados para o formato snake_case, o que envolveu a remoção de espaços e caracteres especiais para garantir a consistência e facilitar o acesso aos dados programaticamente.
+```python3
+data.columns = data.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '')
+```
+
+A coluna 'gender', que continha valores categóricos ('Male' e 'Female'), foi tratada manualmente, mapeando 'Male' para 1 e 'Female' para 2, transformando os dados em formato numérico compatível com o modelo.
+```python3
+data['gender'] = data['gender'].map({'Male': 1, 'Female': 2})
+```
+
+As demais colunas com valores descritivos foram convertidas para dados numéricos utilizando o LabelEncoder, o que permitiu representar categorias como números inteiros.
+```python3
+label_encoder = LabelEncoder()
+```
+
+As variáveis independentes (features) foram separadas das variáveis dependentes (target), sendo que o alvo escolhido foi a coluna que representa a classificação de diabetes.
+```python3
+for column in sorted_headers_relevance + ['class']:
+    data[column] = label_encoder.fit_transform(data[column])
+```
+
+ Os dados foram divididos em conjuntos de treino (70%) e teste (30%), utilizando estratificação com base na variável alvo, para garantir que a proporção das classes fosse mantida em ambos os conjuntos.
+```python3
+y = data['class']
+X = data[sorted_headers_relevance]
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7,random_state=42)
+```
+
+Foi inicializado um modelo de árvore de decisão com um random_state fixo, assegurando que os resultados fossem replicáveis em futuras execuções.
+```python3
+gnb = DecisionTreeClassifier(random_state=42)
+```
+
+O modelo foi treinado utilizando o conjunto de treino balanceado, permitindo que ele aprendesse os padrões e critérios de decisão necessários para realizar a classificação.
+```python3
+gnb.fit(X_train_bal, y_train_bal)
+```
+
+Após o treinamento, o modelo foi utilizado para realizar previsões no conjunto de teste, produzindo resultados que puderam ser comparados aos valores reais da variável alvo.
+```python3
+y_pred = gnb.predict(X_test)
+```
+
+### Cross-validation (Validação Cruzada) ###
+Uma validação cruzada foi realizada, dividindo os dados em cinco subconjuntos para calcular as métricas recall e acurácia em diferentes partições, avaliando a robustez e generalização do modelo.
+```python3
+cross_val_recall = cross_val_score(gnb, X, y, cv=5, scoring='recall')
+cross_val_accuracy = cross_val_score(gnb, X, y, cv=5, scoring='accuracy')
+
+print(f"Mean Recall (Class 1) with Cross-Validation: {cross_val_recall.mean():.4f}")
+print(f"Mean Accuracy with Cross-Validation: {cross_val_accuracy.mean():.4f}")
+```
+
+### Tuning de Hiperparâmetros (GridSearchCV) ###
+Um processo de GridSearchCV foi executado para buscar os melhores hiperparâmetros para a árvore de decisão, como critérios de divisão, profundidade máxima e número mínimo de amostras por nó, otimizando o desempenho do modelo.
+```python3
+param_grid = {
+    'criterion': ['gini', 'entropy'],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10]
+}
+
+grid_search = GridSearchCV(DecisionTreeClassifier(random_state=42), param_grid, cv=5, scoring='recall')
+grid_search.fit(X_train_bal, y_train_bal)
+```
+
+O modelo otimizado foi identificado e exibido, incluindo os parâmetros que resultaram no melhor desempenho durante a busca.
+```python3
+print(f"Melhores parâmetros encontrados: {grid_search.best_params_}")
+```
+
+As previsões foram refeitas no conjunto de teste utilizando o modelo otimizado, oferecendo uma nova avaliação do desempenho com base nos parâmetros ajustados.
+```python3
+best_model = grid_search.best_estimator_
+print(f"Melhor modelo encontrado: {best_model}")
+y_pred_best = best_model.predict(X_test)
+```
+
+### 7. Visualização da Árvore de Decisão ###
+Foi gerada uma visualização gráfica da estrutura da árvore de decisão otimizada, permitindo observar os critérios de divisão em cada nó e as saídas previstas nas folhas.
+```python3
+plt.figure(figsize=(12, 8))
+tree.plot_tree(best_model, filled=True, feature_names=sorted_headers_relevance)
+plt.show()
+```
+
+As métricas de desempenho, incluindo recall por classe, acurácia e F1 Score, foram calculadas para quantificar a eficácia do modelo no conjunto de teste.
+```python3
+recall_0 = recall_score(y_test, y_pred_best, pos_label=0)
+recall_1 = recall_score(y_test, y_pred_best, pos_label=1)
+accuracy = accuracy_score(y_test, y_pred_best)
+f1 = f1_score(y_test, y_pred_best)
+
+print(f"Recall Class 0: {recall_0:.4f}")
+print(f"Recall Class 1: {recall_1:.4f}")
+print(f"Accuracy: {accuracy:.4f}")
+print(f"F1 Score: {f1:.4f}")
+```
+
+ Valores das métricas
+```python3
+metrics = {
+    'Recall Class 0': recall_0,
+    'Recall Class 1': recall_1,
+    'Accuracy': accuracy,
+    'F1 Score': f1
+}
+```
+
+É possível verificar o código completo [neste link](/src/decision_tree_stratify.ipynb).
 
 # Avaliação dos modelos criados
 
@@ -504,8 +631,7 @@ Razões principais para usar o recall:
 As métricas de precisão, recall e F1-Score foram escolhidas para avaliar o modelo Random Forest porque elas fornecem uma visão completa de seu desempenho. A precisão mostra a porcentagem de acertos nas previsões do modelo, enquanto o recall foca em quantos casos de diabetes o modelo conseguiu identificar corretamente. Já o F1-Score é uma média entre a precisão e o recall
 
 ### Decision Tree
-# SMOTE: A métrica de desempenho principal utilizada foi o recall pois há uma necessidade de minimizar os falsos negativos.
-# STRATIFY:
+Tanto no SMOTE quanto na estratificação, a principal métrica de desempenho utilizada foi o recall, devido à necessidade de reduzir ao máximo os falsos negativos.
 
 ## Discussão dos resultados obtidos
 
@@ -573,6 +699,9 @@ Ficou evidente que assim como haviamos feito as analises dos dados anteriormente
 
 
 ### Decision Tree
+
+
+Dois testes foram realizados utilizando os mesmos parâmetros: o primeiro com a base balanceada por SMOTE e o segundo por meio de estratificação. Os resultados indicaram que o uso do SMOTE proporcionou maior precisão na classificação da classe 1: Positivo para diabetes. 
 
 
 
