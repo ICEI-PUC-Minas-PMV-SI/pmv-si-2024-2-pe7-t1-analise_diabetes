@@ -27,7 +27,6 @@ Algumas das etapas podem estar relacionadas à:
 * Entre outras....
 
 Avalie quais etapas são importantes para o contexto dos dados que você está trabalhando, pois a qualidade dos dados e a eficácia do pré-processamento desempenham um papel fundamental no sucesso de modelo(s) de aprendizado de máquina. É importante entender o contexto do problema e ajustar as etapas de preparação de dados de acordo com as necessidades específicas de cada projeto. -->
-## Naive bayes
 
 Para a preparação dos dados no treinamento de modelos de machine learning, foram seguidos dois passos principais:
 
