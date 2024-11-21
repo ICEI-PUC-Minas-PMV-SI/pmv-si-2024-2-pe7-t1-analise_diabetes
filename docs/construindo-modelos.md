@@ -750,13 +750,13 @@ Diante dos resultados obtidos:
 3. O Random Forest foi escolhido como o modelo ideal para compor a solução final. Seu desempenho consistente e equilibrado, aliado à alta capacidade de identificar casos positivos e negativos, o torna uma opção confiável para a predição de diabetes a partir de sintomas.
 Este modelo garante não apenas precisão elevada, mas também a segurança de uma aplicação robusta, adequada para uso em contextos médicos onde diagnósticos confiáveis são indispensáveis.
 
-
+<!--      Não é necessário essa parte, isso é apenas explicação da professora
 ## Observações importantes
 
 Todas as tarefas realizadas nesta etapa deverão ser registradas em formato de texto junto com suas explicações de forma a apresentar  os códigos desenvolvidos e também, o código deverá ser incluído, na íntegra, na pasta "src".
 
 Além disso, deverá ser entregue um vídeo onde deverão ser descritas todas as etapas realizadas. O vídeo, que não tem limite de tempo, deverá ser apresentado por **todos os integrantes da equipe**, de forma que, cada integrante tenha oportunidade de apresentar o que desenvolveu e as  percepções obtidas.
-
+-->
 
 # Referências
 [^1]: [Floresta aleatória](https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria)
