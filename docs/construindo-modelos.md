@@ -761,3 +761,8 @@ Além disso, deverá ser entregue um vídeo onde deverão ser descritas todas as
 # Referências
 [^1]: [Floresta aleatória](https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria)
 [^2]: [What is random forest?](https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria)
+[^3]: [Naive Bayes Classification Tutorial using Scikit-learn](https://www.datacamp.com/tutorial/naive-bayes-scikit-learn)
+[^4]: [Label Encoding in Python](https://www.geeksforgeeks.org/ml-label-encoding-of-datasets-in-python/)
+[^5]: [Decision Tree Classification in Python](https://www.datacamp.com/tutorial/decision-tree-classification-python)
+[^6]: [SMOTE for Imbalanced Classification with Python](https://www.geeksforgeeks.org/smote-for-imbalanced-classification-with-python/)
+
