@@ -759,10 +759,10 @@ Além disso, deverá ser entregue um vídeo onde deverão ser descritas todas as
 -->
 
 # Referências
-[^1]: [Floresta aleatória](https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria)
-[^2]: [What is random forest?](https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria)
-[^3]: [Naive Bayes Classification Tutorial using Scikit-learn](https://www.datacamp.com/tutorial/naive-bayes-scikit-learn)
-[^4]: [Label Encoding in Python](https://www.geeksforgeeks.org/ml-label-encoding-of-datasets-in-python/)
-[^5]: [Decision Tree Classification in Python](https://www.datacamp.com/tutorial/decision-tree-classification-python)
-[^6]: [SMOTE for Imbalanced Classification with Python](https://www.geeksforgeeks.org/smote-for-imbalanced-classification-with-python/)
+- Floresta aleatória, Wikipédia, 2024. Disponível em: https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria. Acesso em: 21 nov. 2024.
+- What is random forest?, Wikipédia, 2024. Disponível em: https://pt.wikipedia.org/wiki/Floresta_aleat%C3%B3ria. Acesso em: 21 nov. 2024.
+- Naive Bayes Classification Tutorial using Scikit-learn, Datacamp, 2023. Disponível em: https://www.datacamp.com/tutorial/naive-bayes-scikit-learn. Acesso em: 21 nov. 2024.
+- Label Encoding in Python, Geeks For Geeks, 2023. Disponível em: https://www.geeksforgeeks.org/ml-label-encoding-of-datasets-in-python/. Acesso em: 21 nov. 2024.
+- Decision Tree Classification in Python, Datacamp, 2024. Disponível em: https://www.datacamp.com/tutorial/decision-tree-classification-python. Acesso em: 21 nov. 2024.
+- SMOTE for Imbalanced Classification with Python, Geeks for Geeks, 2024. Disponível em: https://www.geeksforgeeks.org/smote-for-imbalanced-classification-with-python/. Acesso em: 21 nov. 2024.
 
