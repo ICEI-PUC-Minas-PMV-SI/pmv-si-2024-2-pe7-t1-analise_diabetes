@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import accuracy_score, f1_score, recall_score
+from sklearn.metrics import accuracy_score, f1_score, recall_score, classification_report
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 
@@ -43,6 +43,32 @@ for column in sorted_headers_relevance + ['class']:
 
 # Separar o nosso alvo, resultado final, classificacao de diabetes
 y = data['class']
+
+
+# Captura todas colunas com excessão do alvo
+X = data[sorted_headers_relevance]
+# Separar os dados em treino e teste usando estratificação pela "class"
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, stratify=y, random_state=42)
+
+# Seleciona o algoritmo
+modelo_generico = GaussianNB()
+# Treina o modelo
+modelo_generico.fit(X_train, y_train)
+# Calcula a predição do modelo
+y_pred = modelo_generico.predict(X_test)
+
+# Exibir o relatório de classificação
+relatorio_classificacao = classification_report(y_test, y_pred)
+print(relatorio_classificacao)
+#               precision    recall  f1-score   support
+# 
+#            0       0.90      0.90      0.90        60
+#            1       0.94      0.94      0.94        96
+# 
+#     accuracy                           0.92       156
+#    macro avg       0.92      0.92      0.92       156
+# weighted avg       0.92      0.92      0.92       156
+
 
 
 # Armazenar os resultados de recall para serem exibidos posteriormente
