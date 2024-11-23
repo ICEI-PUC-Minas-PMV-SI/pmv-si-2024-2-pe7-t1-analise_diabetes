@@ -285,7 +285,7 @@ plt.plot()
 ```
 
 
-O código completo pode ser conferido aqui [Link para Código](/src/NaiveBayers.py)
+O código completo pode ser conferido aqui [Link para Código](/src/NaiveBayes.py)
 
 ## Random Forest
 
