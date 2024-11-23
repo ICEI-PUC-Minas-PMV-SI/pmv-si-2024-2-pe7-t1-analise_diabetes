@@ -92,7 +92,10 @@ gnb = GaussianNB()
 Isso foi escolhido para preservar os detalhes relacionados ao atributo idade, já que ele não é uma categoria e a sua conversão em faixas etárias causaria a perda de detalhes. É importante deixar claro que esse algoritmo somente se mostrou adequado nesse caso pois o atributo "idade" apresenta uma distribuição normal, atributos com uma variação muito grande em sua distribuição não seriam adequados.
 
 A análise do heatmap indicou a necessidade de ordenar as colunas de acordo com o valor de correlação com a classificação de diabetes.
-</br> </br>![Heatmap correlação variáveis](/docs/img/heatmap.png) </br> </br>
+</br> </br>
+![Heatmap correlação variáveis](/docs/img/heatmap.png)
+[Link para Código de construção do heatmap](/src/heatmap_relevancia_parametros.py)
+</br> </br>
 Seguindo essa lógica, as variáveis foram ordenadas com base no valor de correlação com a classificação de diabetes, priorizando aquelas que apresentaram maior influência na determinação da presença ou ausência da condição. A lista abaixo reflete essa priorização:
 
 1. polyuria
