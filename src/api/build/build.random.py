@@ -18,9 +18,9 @@ dados.columns = dados.columns.str.strip().str.lower().str.replace(' ', '_').str.
 dados['gender'] = dados['gender'].map({'Male': 1, 'Female': 2})
 label_encoder = LabelEncoder()
 for column in sorted_headers_relevance + ['class']:
-    dados[column] = label_encoder.fit_transform(dados[column])
+  dados[column] = label_encoder.fit_transform(dados[column])
 
-X = dados.drop('class', axis=1)
+X = dados[sorted_headers_relevance]
 y = dados['class']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
