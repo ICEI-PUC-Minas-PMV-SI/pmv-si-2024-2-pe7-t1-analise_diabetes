@@ -8,9 +8,22 @@ from imblearn.over_sampling import SMOTE
 import pickle
 
 sorted_headers_relevance = [
-  'polyuria', 'polydipsia', 'age', 'gender', 'sudden_weight_loss',
-  'partial_paresis', 'polyphagia', 'irritability', 'alopecia', 'visual_blurring',
-  'weakness', 'muscle_stiffness', 'genital_thrush', 'obesity', 'delayed_healing', 'itching'
+  'polyuria',
+  'polydipsia',
+  'age',
+  'gender',
+  'sudden_weight_loss',
+  'partial_paresis',
+  'polyphagia',
+  'irritability',
+  'alopecia',
+  'visual_blurring',
+  'weakness',
+  'muscle_stiffness',
+  'genital_thrush',
+  'obesity',
+  'delayed_healing',
+  'itching',
 ]
 
 data = pd.read_csv('./dataset-full.csv')
@@ -24,8 +37,8 @@ label_encoder = LabelEncoder()
 for column in sorted_headers_relevance + ['class']:
   data[column] = label_encoder.fit_transform(data[column])
 
-X = data[sorted_headers_relevance].to_numpy()
-y = data['class'].to_numpy()
+X = data[sorted_headers_relevance]
+y = data['class']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7,random_state=42) 
 

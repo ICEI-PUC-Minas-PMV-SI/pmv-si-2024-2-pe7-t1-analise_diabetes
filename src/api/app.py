@@ -3,6 +3,7 @@ from flask_cors import CORS
 from waitress import serve
 import pickle
 import os
+import pandas as pd
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"*": {"origins": "*"}})
@@ -57,12 +58,12 @@ def index():
             return {'error': f"Field {key} must be 1 or 2"}, 400
         
     # convert to list in the same order of the model
-    input_list = [input[key] for key in fields]
+    input_df = pd.DataFrame([[input[key] for key in fields]], columns=fields)
 
     # predict
-    naive_pred = naive_model.predict([input_list])
-    tree_pred = tree_model.predict([input_list])
-    forest_pred = forest_model.predict([input_list])
+    naive_pred = naive_model.predict(input_df)
+    tree_pred = tree_model.predict(input_df)
+    forest_pred = forest_model.predict(input_df)
 
     naive_result = bool(naive_pred[0])
     tree_result = bool(tree_pred[0])
@@ -71,6 +72,7 @@ def index():
     points = int(naive_result) + int(tree_result) + int(forest_result)
 
     final_classification = False if points < 2 else True
+    input_list = input_df.values.tolist()[0]
 
     return {
         'prevision': {
