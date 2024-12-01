@@ -20,8 +20,8 @@ label_encoder = LabelEncoder()
 for column in sorted_headers_relevance + ['class']:
   dados[column] = label_encoder.fit_transform(dados[column])
 
-X = dados[sorted_headers_relevance]
-y = dados['class']
+X = dados[sorted_headers_relevance].to_numpy()
+y = dados['class'].to_numpy()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 

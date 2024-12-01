@@ -31,8 +31,8 @@ label_encoder = LabelEncoder()
 for column in sorted_headers_relevance + ['class']:
     data[column] = label_encoder.fit_transform(data[column])
 
-y = data['class']
-X = data[sorted_headers_relevance]
+y = data['class'].to_numpy()
+X = data[sorted_headers_relevance].to_numpy()
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, stratify=y, random_state=42)
 
 modelo_generico = GaussianNB()
