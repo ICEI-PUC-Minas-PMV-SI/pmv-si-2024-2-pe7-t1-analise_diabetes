@@ -5,7 +5,7 @@ curl --request POST \
   --data '{
 	"polyuria": 1,
 	"polydipsia": 1,
-	"gender": 2,
+	"gender": 1,
 	"age": 28,
 	"sudden_weight_loss": 1,
 	"partial_paresis": 1,

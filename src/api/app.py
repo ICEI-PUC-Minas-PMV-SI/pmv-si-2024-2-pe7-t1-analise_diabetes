@@ -54,9 +54,7 @@ def index():
             return {'error': f"Field {key} must be a number"}, 400
         if input[key] < 0:
             return {'error': f"Field {key} must be a positive number"}, 400
-        if key == 'gender' and input[key] not in [1, 2]:
-            return {'error': f"Field {key} must be 1 or 2"}, 400
-        if key not in ['gender', 'age'] and input[key] not in [0, 1]:
+        if key != 'age' and input[key] not in [0, 1]:
             return {'error': f"Field {key} must be 0 or 1"}, 400
         
     # convert to list in the same order of the model
