@@ -28,7 +28,7 @@ path = './dataset-full.csv'
 dados = pd.read_csv(path)
 
 dados.columns = dados.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '')
-dados['gender'] = dados['gender'].map({'Male': 1, 'Female': 2})
+dados['gender'] = dados['gender'].map({'Male': 0, 'Female': 1})
 label_encoder = LabelEncoder()
 for column in sorted_headers_relevance + ['class']:
   dados[column] = label_encoder.fit_transform(dados[column])

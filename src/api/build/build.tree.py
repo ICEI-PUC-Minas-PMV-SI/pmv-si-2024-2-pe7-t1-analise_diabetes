@@ -30,7 +30,7 @@ data = pd.read_csv('./dataset-full.csv')
 
 data.columns = data.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '')
 
-data['gender'] = data['gender'].map({'Male': 1, 'Female': 2})
+data['gender'] = data['gender'].map({'Male': 0, 'Female': 1})
 
 label_encoder = LabelEncoder()
 

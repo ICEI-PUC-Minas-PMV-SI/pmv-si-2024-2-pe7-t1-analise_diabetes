@@ -26,7 +26,7 @@ sorted_headers_relevance = [
 
 data = pd.read_csv('./dataset-full.csv')
 data.columns = data.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '')
-data['gender'] = data['gender'].map({'Male': 1, 'Female': 2})
+data['gender'] = data['gender'].map({'Male': 0, 'Female': 1})
 label_encoder = LabelEncoder()
 for column in sorted_headers_relevance + ['class']:
     data[column] = label_encoder.fit_transform(data[column])
@@ -41,7 +41,6 @@ y_pred = modelo_generico.predict(X_test)
 
 recall = recall_score(y_test, y_pred)
 print('Recall:', recall)
-
 
 with open('./naive_model.pkl', 'wb') as file:
   pickle.dump(modelo_generico, file)
