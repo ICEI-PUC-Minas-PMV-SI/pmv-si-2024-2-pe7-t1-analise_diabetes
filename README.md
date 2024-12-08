@@ -40,7 +40,5 @@ Para testar a aplicação acesse: [Link para aplicação](https://resonant-crois
 
 # Apresentação
 
-<li>Apresentação da solução</li>
-
 [Assista ao vídeo aqui](https://drive.google.com/file/d/1_AtAd2CNUHjQ2A_dXcsG3zslaOm76ls-/view?usp=sharing).
 
