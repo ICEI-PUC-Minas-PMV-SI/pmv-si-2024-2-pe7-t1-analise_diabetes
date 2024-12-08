@@ -34,5 +34,5 @@ A análise dos modelos evidenciou que:
 
 - Acesse o link abaixo e confira os testes realidados com a aplicação em produção.
 
-[Assista ao vídeo aqui]([https://drive.google.com/file/d/1_AtAd2CNUHjQ2A_dXcsG3zslaOm76ls-/view?usp=sharing]).
+[Assista ao vídeo aqui](https://drive.google.com/file/d/1_AtAd2CNUHjQ2A_dXcsG3zslaOm76ls-/view?usp=sharing).
 
