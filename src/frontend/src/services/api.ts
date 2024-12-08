@@ -3,7 +3,7 @@ import { SymptomData, ApiResponse } from '../types/symptoms';
 export const submitSymptoms = async (data: SymptomData): Promise<ApiResponse> => {
   const transformedData = {
     age: data.age,
-    gender: data.gender === 'male' ? 1 : 0,
+    gender: data.gender === 'male' ? 0 : 1,
     polyuria: data.polyuria ? 1 : 0,
     polydipsia: data.polydipsia ? 1 : 0,
     sudden_weight_loss: data.sudden_weight_loss ? 1 : 0,
