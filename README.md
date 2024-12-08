@@ -30,9 +30,9 @@ O projeto tem como objetivo desenvolver uma solução baseada em algoritmos de m
 | ETAPA 3         |[Preparação dos dados, construção e avaliação dos modelos propostos](docs/construindo-modelos.md) |
 | ETAPA 4        |[Implantação e apresentação da solução](docs/implantação-apresentacao.md) <br>  |
 
-## Instruções de utilização
+## Instruções de utilização da demonstração
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+Para testar a aplicação acesse: [Link para aplicação](https://resonant-croissant-33254b.netlify.app/)
 
 # Código
 
