@@ -5,7 +5,6 @@ export const translations = {
   gender: 'Gênero',
   male: 'Masculino',
   female: 'Feminino',
-  other: 'Outro',
   submit: 'Enviar',
   success: 'Análise Concluída!',
   dataSaved: 'Seus dados foram salvos com sucesso e serão analisados.',
@@ -13,7 +12,12 @@ export const translations = {
   error: 'Erro',
   errorMessage: 'Ocorreu um erro ao enviar os dados. Por favor, tente novamente.',
   visitDoctor: 'É bom você fazer uma visita ao médico, encontramos alguns indícios que você possa ter Diabetes!',
-  noSymptoms: 'Você não apresenta sintomas caracteristicos de diabetes. Tenha um estilo de vida saudável para continuar assim!'
+  noSymptoms: 'Você não apresenta sintomas caracteristicos de diabetes. Tenha um estilo de vida saudável para continuar assim!',
+  modelPredictions: 'Previsões dos Modelos',
+  model: 'Modelo',
+  prediction: 'Previsão',
+  positive: 'Positivo',
+  negative: 'Negativo'
 };
 
 export const symptomDescriptions = {

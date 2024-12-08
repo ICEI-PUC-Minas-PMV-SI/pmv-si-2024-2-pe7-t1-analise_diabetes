@@ -1,4 +1,4 @@
-export type Gender = 'male' | 'female' | 'other';
+export type Gender = 'male' | 'female';
 
 export interface SymptomData {
   age: number;
@@ -17,4 +17,13 @@ export interface SymptomData {
   obesity: boolean;
   delayed_healing: boolean;
   itching: boolean;
+}
+
+export interface ApiResponse {
+  final_classification: boolean;
+  prevision: {
+    forest: boolean;
+    naive: boolean;
+    tree: boolean;
+  };
 }

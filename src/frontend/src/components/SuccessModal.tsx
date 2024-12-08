@@ -9,6 +9,12 @@ import {
   VStack,
   Text,
   Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
 } from '@chakra-ui/react';
 import { AlertTriangle, CheckCircle } from 'lucide-react';
 import { translations } from '../translations/pt-br';
@@ -17,12 +23,18 @@ interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
   hasDiabetesRisk: boolean;
+  predictions?: {
+    forest: boolean;
+    naive: boolean;
+    tree: boolean;
+  };
 }
 
 export const SuccessModal: React.FC<SuccessModalProps> = ({ 
   isOpen, 
   onClose, 
-  hasDiabetesRisk 
+  hasDiabetesRisk,
+  predictions 
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="scale">
@@ -55,6 +67,40 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
                 ? translations.visitDoctor 
                 : translations.noSymptoms}
             </Text>
+
+            {predictions && (
+              <Box w="100%" mt={4}>
+                <Text fontWeight="bold" mb={2}>{translations.modelPredictions}</Text>
+                <Table size="sm" variant="simple">
+                  <Thead>
+                    <Tr>
+                      <Th>{translations.model}</Th>
+                      <Th>{translations.prediction}</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td>Random Forest</Td>
+                      <Td color={predictions.forest ? "orange.500" : "green.500"}>
+                        {predictions.forest ? translations.positive : translations.negative}
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Naive Bayes</Td>
+                      <Td color={predictions.naive ? "orange.500" : "green.500"}>
+                        {predictions.naive ? translations.positive : translations.negative}
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Decision Tree</Td>
+                      <Td color={predictions.tree ? "orange.500" : "green.500"}>
+                        {predictions.tree ? translations.positive : translations.negative}
+                      </Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Box>
+            )}
           </VStack>
         </ModalBody>
       </ModalContent>

@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { SymptomCheckbox } from './SymptomCheckbox';
 import { SuccessModal } from './SuccessModal';
-import { SymptomData, Gender } from '../types/symptoms';
+import { SymptomData, Gender, ApiResponse } from '../types/symptoms';
 import { translations } from '../translations/pt-br';
 import { submitSymptoms } from '../services/api';
 
@@ -38,6 +38,7 @@ const initialSymptoms: SymptomData = {
 export const SymptomForm: React.FC = () => {
   const [formData, setFormData] = useState<SymptomData>(initialSymptoms);
   const [hasDiabetesRisk, setHasDiabetesRisk] = useState(false);
+  const [predictions, setPredictions] = useState<ApiResponse['prevision']>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
@@ -46,6 +47,7 @@ export const SymptomForm: React.FC = () => {
     try {
       const response = await submitSymptoms(formData);
       setHasDiabetesRisk(response.final_classification);
+      setPredictions(response.prevision);
       onOpen();
     } catch (error) {
       toast({
@@ -94,7 +96,6 @@ export const SymptomForm: React.FC = () => {
             <Select name="gender" value={formData.gender} onChange={handleInputChange}>
               <option value="male">{translations.male}</option>
               <option value="female">{translations.female}</option>
-              <option value="other">{translations.other}</option>
             </Select>
           </FormControl>
 
@@ -131,6 +132,7 @@ export const SymptomForm: React.FC = () => {
         isOpen={isOpen} 
         onClose={onClose} 
         hasDiabetesRisk={hasDiabetesRisk}
+        predictions={predictions}
       />
     </>
   );
