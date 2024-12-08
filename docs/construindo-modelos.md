@@ -753,6 +753,9 @@ Diante dos resultados obtidos:
 3. O Random Forest foi escolhido como o modelo ideal para compor a solução final. Seu desempenho consistente e equilibrado, aliado à alta capacidade de identificar casos positivos e negativos, o torna uma opção confiável para a predição de diabetes a partir de sintomas.
 Este modelo garante não apenas precisão elevada, mas também a segurança de uma aplicação robusta, adequada para uso em contextos médicos onde diagnósticos confiáveis são indispensáveis.
 
+## Apresentação 
+
+O vídeo de apresentação de construção dos modelos pode ser acesso em: [Link Para Vídeo](https://youtu.be/D9qi_KkpsgI)
 <!--      Não é necessário essa parte, isso é apenas explicação da professora
 ## Observações importantes
 
