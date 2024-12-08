@@ -1,29 +1,28 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title:
+title: Análise de Diabetes
 authors:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - name-suffix: Professor XXXX
+  - family-names: Alves 
+    given-names: Andre 
+  - family-names: Ramos
+    given-names: Ricky 
+  - family-names: Donizeti  
+    given-names: Renato 
+  - family-names: Brito 
+    given-names: Lucas 
+  - family-names: Ribeiro 
+    given-names: Izabele 
+  - family-names: Oliveira 
+    given-names: Sânzio 
+  - name-suffix: Professor Luciana de Nardin
     affiliation: PUC Minas
-    family-names:
-    given-names:
+    family-names: Nardin
+    given-names: Luciana
 keywords:
-  -
-  -
+   - diabetes
+  - análise de dados
+  - aprendizado de máquina
 repository-code:
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2023-06-30
+date-released: 2024-12-08
