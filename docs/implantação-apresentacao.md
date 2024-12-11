@@ -70,6 +70,17 @@ frontend:
 
 
 
+# Teste de carga
+
+No ambiente local foi realizado teste de carga na api, o resultado pode ser conferido na imagem abaixo
+
+![image](https://github.com/user-attachments/assets/dc24d1dd-e6f8-4714-98d8-f79f9d35974f)
+
+Foi possível realizar 1000 requisições em um período de 10 segundos com a latencia máxima de 204ms.
+
+Embora seja um número ótimo, em produção tais valores podem variar devido a restrições de rede e afins que fogem do controle da aplicação. Como por exemplo o _Cold Start_ que a plataforma _render_ realiza.
+É bem semelhante a forma que as lambdas funcionam, caso passe muito tempo sem receber nenhuma requisição o serviço é temporariamente desligado para polpar recursos computacionais, então a primeira requisição após um longo período tende a ser lenta, mas as requisições seguintes são mais rápidas.
+
 
 # Apresentação da solução
 
