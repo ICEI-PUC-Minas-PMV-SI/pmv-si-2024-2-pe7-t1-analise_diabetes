@@ -2,21 +2,21 @@ cff-version: 1.0.1
 message: Please cite this software using these metadata.
 title: Análise de Diabetes
 authors:
-  - family-names: Alves 
+  - family-names: Alves Leocadio
     given-names: Andre 
-  - family-names: Ramos
+  - family-names: Ramos de Oliveira
     given-names: Ricky 
-  - family-names: Donizeti  
+  - family-names: Donizeti da Silva Jr. 
     given-names: Renato 
-  - family-names: Brito 
+  - family-names: Brito de Paula
     given-names: Lucas 
-  - family-names: Ribeiro 
+  - family-names: Ribeiro Lima de Oliveira
     given-names: Izabele 
-  - family-names: Oliveira 
+  - family-names: de Oliveira Carmo
     given-names: Sânzio 
-  - name-suffix: Professor Luciana de Nardin
+  - name-suffix: Professor 
     affiliation: PUC Minas
-    family-names: Nardin
+    family-names: De Nardin
     given-names: Luciana
 keywords:
   - diabetes
